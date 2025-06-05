@@ -8,9 +8,9 @@ export default function Alert({
     title: string;
 }) {
     return (
-        <div className="flex items-stretch rounded-2xl overflow-hidden border border-accent-foreground bg-accent-background h-fit w-full">
-            <div className="flex items-center justify-center gap-2 bg-accent-foreground p-2 self-stretch">
-                <AlertCircle className="text-accent-background" />
+        <div className="flex rounded-2xl overflow-hidden border border-accent-foreground bg-accent-background w-full">
+            <div className="flex items-center text-accent-background justify-center gap-2 bg-accent-foreground p-2">
+                <AlertCircle />
             </div>
             <div className="flex flex-col gap-2 py-2 px-4">
                 <p className="font-bold uppercase">{title}</p>

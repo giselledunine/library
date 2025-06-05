@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Books {
+  id          Int          @id(map: "books_pkey") @default(autoincrement())
+  title       String
+  description String
+  author      Int          @default(autoincrement())
+  note        String?
+  Authors     Authors      @relation(fields: [author], references: [id], onDelete: NoAction, map: "foreign_key_books")
+  Deliveries  Deliveries[]
+}
+
+model Authors {
+  id    Int     @id(map: "Author_pkey") @default(autoincrement())
+  name  String  @unique(map: "Author_name_key") @db.VarChar(255)
+  Books Books[]
+}
+
+model Deliveries {
+  id          Int       @id(map: "deliveries_pkey") @default(autoincrement())
+  book_id     Int
+  library_id  Int
+  borrowed_at DateTime  @db.Timestamp(6)
+  due_date    DateTime  @db.Timestamp(6)
+  returned_at DateTime? @db.Timestamp(6)
+  user_id     Int
+  Books       Books     @relation(fields: [book_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "book_foreign_key")
+  Libraries   Libraries @relation(fields: [library_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "library_foreign_key")
+  Users       Users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "user_foreign_key")
+}
+
+model Libraries {
+  id         Int          @id @default(autoincrement())
+  name       String
+  location   String?
+  Deliveries Deliveries[]
+}
+
+model Users {
+  id         Int          @id @default(autoincrement())
+  firstname  String
+  lastname   String
+  email      String
+  Comments   Comments[]
+  Deliveries Deliveries[]
+}
+
+model Comments {
+  id      Int    @id @default(autoincrement())
+  comment String
+  user_id Int
+  book_id Int
+  Users   Users  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_foreign_key")
+}
