@@ -8,6 +8,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Authors {
+  id    Int     @id(map: "Author_pkey") @default(autoincrement())
+  name  String  @unique(map: "Author_name_key") @db.VarChar(255)
+  Books Books[]
+}
+
 model Books {
   id          Int          @id(map: "books_pkey") @default(autoincrement())
   title       String
@@ -18,10 +24,12 @@ model Books {
   Deliveries  Deliveries[]
 }
 
-model Authors {
-  id    Int     @id(map: "Author_pkey") @default(autoincrement())
-  name  String  @unique(map: "Author_name_key") @db.VarChar(255)
-  Books Books[]
+model Comments {
+  id      Int    @id @default(autoincrement())
+  comment String
+  user_id Int
+  book_id Int
+  Users   Users  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_foreign_key")
 }
 
 model Deliveries {
@@ -51,12 +59,4 @@ model Users {
   email      String
   Comments   Comments[]
   Deliveries Deliveries[]
-}
-
-model Comments {
-  id      Int    @id @default(autoincrement())
-  comment String
-  user_id Int
-  book_id Int
-  Users   Users  @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_foreign_key")
 }

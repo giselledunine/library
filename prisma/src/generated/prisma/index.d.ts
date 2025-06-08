@@ -14,15 +14,20 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Authors
+ * 
+ */
+export type Authors = $Result.DefaultSelection<Prisma.$AuthorsPayload>
+/**
  * Model Books
  * 
  */
 export type Books = $Result.DefaultSelection<Prisma.$BooksPayload>
 /**
- * Model Authors
+ * Model Comments
  * 
  */
-export type Authors = $Result.DefaultSelection<Prisma.$AuthorsPayload>
+export type Comments = $Result.DefaultSelection<Prisma.$CommentsPayload>
 /**
  * Model Deliveries
  * 
@@ -38,11 +43,6 @@ export type Libraries = $Result.DefaultSelection<Prisma.$LibrariesPayload>
  * 
  */
 export type Users = $Result.DefaultSelection<Prisma.$UsersPayload>
-/**
- * Model Comments
- * 
- */
-export type Comments = $Result.DefaultSelection<Prisma.$CommentsPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -51,8 +51,8 @@ export type Comments = $Result.DefaultSelection<Prisma.$CommentsPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Books
- * const books = await prisma.books.findMany()
+ * // Fetch zero or more Authors
+ * const authors = await prisma.authors.findMany()
  * ```
  *
  *
@@ -72,8 +72,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Books
-   * const books = await prisma.books.findMany()
+   * // Fetch zero or more Authors
+   * const authors = await prisma.authors.findMany()
    * ```
    *
    *
@@ -170,6 +170,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.authors`: Exposes CRUD operations for the **Authors** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Authors
+    * const authors = await prisma.authors.findMany()
+    * ```
+    */
+  get authors(): Prisma.AuthorsDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.books`: Exposes CRUD operations for the **Books** model.
     * Example usage:
     * ```ts
@@ -180,14 +190,14 @@ export class PrismaClient<
   get books(): Prisma.BooksDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.authors`: Exposes CRUD operations for the **Authors** model.
+   * `prisma.comments`: Exposes CRUD operations for the **Comments** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Authors
-    * const authors = await prisma.authors.findMany()
+    * // Fetch zero or more Comments
+    * const comments = await prisma.comments.findMany()
     * ```
     */
-  get authors(): Prisma.AuthorsDelegate<ExtArgs, ClientOptions>;
+  get comments(): Prisma.CommentsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.deliveries`: Exposes CRUD operations for the **Deliveries** model.
@@ -218,16 +228,6 @@ export class PrismaClient<
     * ```
     */
   get users(): Prisma.UsersDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.comments`: Exposes CRUD operations for the **Comments** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Comments
-    * const comments = await prisma.comments.findMany()
-    * ```
-    */
-  get comments(): Prisma.CommentsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -286,8 +286,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.2
-   * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
+   * Prisma Client JS version: 6.9.0
+   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
    */
   export type PrismaVersion = {
     client: string
@@ -668,12 +668,12 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Books: 'Books',
     Authors: 'Authors',
+    Books: 'Books',
+    Comments: 'Comments',
     Deliveries: 'Deliveries',
     Libraries: 'Libraries',
-    Users: 'Users',
-    Comments: 'Comments'
+    Users: 'Users'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -692,10 +692,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "books" | "authors" | "deliveries" | "libraries" | "users" | "comments"
+      modelProps: "authors" | "books" | "comments" | "deliveries" | "libraries" | "users"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Authors: {
+        payload: Prisma.$AuthorsPayload<ExtArgs>
+        fields: Prisma.AuthorsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AuthorsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AuthorsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+          }
+          findFirst: {
+            args: Prisma.AuthorsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AuthorsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+          }
+          findMany: {
+            args: Prisma.AuthorsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>[]
+          }
+          create: {
+            args: Prisma.AuthorsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+          }
+          createMany: {
+            args: Prisma.AuthorsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AuthorsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>[]
+          }
+          delete: {
+            args: Prisma.AuthorsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+          }
+          update: {
+            args: Prisma.AuthorsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+          }
+          deleteMany: {
+            args: Prisma.AuthorsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AuthorsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AuthorsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>[]
+          }
+          upsert: {
+            args: Prisma.AuthorsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+          }
+          aggregate: {
+            args: Prisma.AuthorsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAuthors>
+          }
+          groupBy: {
+            args: Prisma.AuthorsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AuthorsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AuthorsCountArgs<ExtArgs>
+            result: $Utils.Optional<AuthorsCountAggregateOutputType> | number
+          }
+        }
+      }
       Books: {
         payload: Prisma.$BooksPayload<ExtArgs>
         fields: Prisma.BooksFieldRefs
@@ -770,77 +844,77 @@ export namespace Prisma {
           }
         }
       }
-      Authors: {
-        payload: Prisma.$AuthorsPayload<ExtArgs>
-        fields: Prisma.AuthorsFieldRefs
+      Comments: {
+        payload: Prisma.$CommentsPayload<ExtArgs>
+        fields: Prisma.CommentsFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.AuthorsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload> | null
+            args: Prisma.CommentsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.AuthorsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+            args: Prisma.CommentsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
           }
           findFirst: {
-            args: Prisma.AuthorsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload> | null
+            args: Prisma.CommentsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.AuthorsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+            args: Prisma.CommentsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
           }
           findMany: {
-            args: Prisma.AuthorsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>[]
+            args: Prisma.CommentsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>[]
           }
           create: {
-            args: Prisma.AuthorsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+            args: Prisma.CommentsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
           }
           createMany: {
-            args: Prisma.AuthorsCreateManyArgs<ExtArgs>
+            args: Prisma.CommentsCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.AuthorsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>[]
+            args: Prisma.CommentsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>[]
           }
           delete: {
-            args: Prisma.AuthorsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+            args: Prisma.CommentsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
           }
           update: {
-            args: Prisma.AuthorsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+            args: Prisma.CommentsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
           }
           deleteMany: {
-            args: Prisma.AuthorsDeleteManyArgs<ExtArgs>
+            args: Prisma.CommentsDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.AuthorsUpdateManyArgs<ExtArgs>
+            args: Prisma.CommentsUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.AuthorsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>[]
+            args: Prisma.CommentsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>[]
           }
           upsert: {
-            args: Prisma.AuthorsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AuthorsPayload>
+            args: Prisma.CommentsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
           }
           aggregate: {
-            args: Prisma.AuthorsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAuthors>
+            args: Prisma.CommentsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateComments>
           }
           groupBy: {
-            args: Prisma.AuthorsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AuthorsGroupByOutputType>[]
+            args: Prisma.CommentsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommentsGroupByOutputType>[]
           }
           count: {
-            args: Prisma.AuthorsCountArgs<ExtArgs>
-            result: $Utils.Optional<AuthorsCountAggregateOutputType> | number
+            args: Prisma.CommentsCountArgs<ExtArgs>
+            result: $Utils.Optional<CommentsCountAggregateOutputType> | number
           }
         }
       }
@@ -1066,80 +1140,6 @@ export namespace Prisma {
           }
         }
       }
-      Comments: {
-        payload: Prisma.$CommentsPayload<ExtArgs>
-        fields: Prisma.CommentsFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.CommentsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.CommentsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
-          }
-          findFirst: {
-            args: Prisma.CommentsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.CommentsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
-          }
-          findMany: {
-            args: Prisma.CommentsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>[]
-          }
-          create: {
-            args: Prisma.CommentsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
-          }
-          createMany: {
-            args: Prisma.CommentsCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.CommentsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>[]
-          }
-          delete: {
-            args: Prisma.CommentsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
-          }
-          update: {
-            args: Prisma.CommentsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
-          }
-          deleteMany: {
-            args: Prisma.CommentsDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.CommentsUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.CommentsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>[]
-          }
-          upsert: {
-            args: Prisma.CommentsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CommentsPayload>
-          }
-          aggregate: {
-            args: Prisma.CommentsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateComments>
-          }
-          groupBy: {
-            args: Prisma.CommentsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CommentsGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.CommentsCountArgs<ExtArgs>
-            result: $Utils.Optional<CommentsCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -1224,12 +1224,12 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    books?: BooksOmit
     authors?: AuthorsOmit
+    books?: BooksOmit
+    comments?: CommentsOmit
     deliveries?: DeliveriesOmit
     libraries?: LibrariesOmit
     users?: UsersOmit
-    comments?: CommentsOmit
   }
 
   /* Types for Logging */
@@ -1320,37 +1320,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type BooksCountOutputType
-   */
-
-  export type BooksCountOutputType = {
-    Deliveries: number
-  }
-
-  export type BooksCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Deliveries?: boolean | BooksCountOutputTypeCountDeliveriesArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * BooksCountOutputType without action
-   */
-  export type BooksCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BooksCountOutputType
-     */
-    select?: BooksCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * BooksCountOutputType without action
-   */
-  export type BooksCountOutputTypeCountDeliveriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: DeliveriesWhereInput
-  }
-
-
-  /**
    * Count Type AuthorsCountOutputType
    */
 
@@ -1378,6 +1347,37 @@ export namespace Prisma {
    */
   export type AuthorsCountOutputTypeCountBooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BooksWhereInput
+  }
+
+
+  /**
+   * Count Type BooksCountOutputType
+   */
+
+  export type BooksCountOutputType = {
+    Deliveries: number
+  }
+
+  export type BooksCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Deliveries?: boolean | BooksCountOutputTypeCountDeliveriesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BooksCountOutputType without action
+   */
+  export type BooksCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BooksCountOutputType
+     */
+    select?: BooksCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BooksCountOutputType without action
+   */
+  export type BooksCountOutputTypeCountDeliveriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DeliveriesWhereInput
   }
 
 
@@ -1455,6 +1455,1071 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model Authors
+   */
+
+  export type AggregateAuthors = {
+    _count: AuthorsCountAggregateOutputType | null
+    _avg: AuthorsAvgAggregateOutputType | null
+    _sum: AuthorsSumAggregateOutputType | null
+    _min: AuthorsMinAggregateOutputType | null
+    _max: AuthorsMaxAggregateOutputType | null
+  }
+
+  export type AuthorsAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AuthorsSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AuthorsMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+  }
+
+  export type AuthorsMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+  }
+
+  export type AuthorsCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type AuthorsAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AuthorsSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AuthorsMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type AuthorsMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type AuthorsCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type AuthorsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Authors to aggregate.
+     */
+    where?: AuthorsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Authors to fetch.
+     */
+    orderBy?: AuthorsOrderByWithRelationInput | AuthorsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AuthorsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Authors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Authors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Authors
+    **/
+    _count?: true | AuthorsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AuthorsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AuthorsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AuthorsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AuthorsMaxAggregateInputType
+  }
+
+  export type GetAuthorsAggregateType<T extends AuthorsAggregateArgs> = {
+        [P in keyof T & keyof AggregateAuthors]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAuthors[P]>
+      : GetScalarType<T[P], AggregateAuthors[P]>
+  }
+
+
+
+
+  export type AuthorsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuthorsWhereInput
+    orderBy?: AuthorsOrderByWithAggregationInput | AuthorsOrderByWithAggregationInput[]
+    by: AuthorsScalarFieldEnum[] | AuthorsScalarFieldEnum
+    having?: AuthorsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AuthorsCountAggregateInputType | true
+    _avg?: AuthorsAvgAggregateInputType
+    _sum?: AuthorsSumAggregateInputType
+    _min?: AuthorsMinAggregateInputType
+    _max?: AuthorsMaxAggregateInputType
+  }
+
+  export type AuthorsGroupByOutputType = {
+    id: number
+    name: string
+    _count: AuthorsCountAggregateOutputType | null
+    _avg: AuthorsAvgAggregateOutputType | null
+    _sum: AuthorsSumAggregateOutputType | null
+    _min: AuthorsMinAggregateOutputType | null
+    _max: AuthorsMaxAggregateOutputType | null
+  }
+
+  type GetAuthorsGroupByPayload<T extends AuthorsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AuthorsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AuthorsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AuthorsGroupByOutputType[P]>
+            : GetScalarType<T[P], AuthorsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AuthorsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    Books?: boolean | Authors$BooksArgs<ExtArgs>
+    _count?: boolean | AuthorsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["authors"]>
+
+  export type AuthorsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["authors"]>
+
+  export type AuthorsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["authors"]>
+
+  export type AuthorsSelectScalar = {
+    id?: boolean
+    name?: boolean
+  }
+
+  export type AuthorsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["authors"]>
+  export type AuthorsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Books?: boolean | Authors$BooksArgs<ExtArgs>
+    _count?: boolean | AuthorsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AuthorsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AuthorsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AuthorsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Authors"
+    objects: {
+      Books: Prisma.$BooksPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+    }, ExtArgs["result"]["authors"]>
+    composites: {}
+  }
+
+  type AuthorsGetPayload<S extends boolean | null | undefined | AuthorsDefaultArgs> = $Result.GetResult<Prisma.$AuthorsPayload, S>
+
+  type AuthorsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AuthorsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AuthorsCountAggregateInputType | true
+    }
+
+  export interface AuthorsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Authors'], meta: { name: 'Authors' } }
+    /**
+     * Find zero or one Authors that matches the filter.
+     * @param {AuthorsFindUniqueArgs} args - Arguments to find a Authors
+     * @example
+     * // Get one Authors
+     * const authors = await prisma.authors.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AuthorsFindUniqueArgs>(args: SelectSubset<T, AuthorsFindUniqueArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Authors that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AuthorsFindUniqueOrThrowArgs} args - Arguments to find a Authors
+     * @example
+     * // Get one Authors
+     * const authors = await prisma.authors.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AuthorsFindUniqueOrThrowArgs>(args: SelectSubset<T, AuthorsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Authors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuthorsFindFirstArgs} args - Arguments to find a Authors
+     * @example
+     * // Get one Authors
+     * const authors = await prisma.authors.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AuthorsFindFirstArgs>(args?: SelectSubset<T, AuthorsFindFirstArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Authors that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuthorsFindFirstOrThrowArgs} args - Arguments to find a Authors
+     * @example
+     * // Get one Authors
+     * const authors = await prisma.authors.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AuthorsFindFirstOrThrowArgs>(args?: SelectSubset<T, AuthorsFindFirstOrThrowArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Authors that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuthorsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Authors
+     * const authors = await prisma.authors.findMany()
+     * 
+     * // Get first 10 Authors
+     * const authors = await prisma.authors.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const authorsWithIdOnly = await prisma.authors.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AuthorsFindManyArgs>(args?: SelectSubset<T, AuthorsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Authors.
+     * @param {AuthorsCreateArgs} args - Arguments to create a Authors.
+     * @example
+     * // Create one Authors
+     * const Authors = await prisma.authors.create({
+     *   data: {
+     *     // ... data to create a Authors
+     *   }
+     * })
+     * 
+     */
+    create<T extends AuthorsCreateArgs>(args: SelectSubset<T, AuthorsCreateArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Authors.
+     * @param {AuthorsCreateManyArgs} args - Arguments to create many Authors.
+     * @example
+     * // Create many Authors
+     * const authors = await prisma.authors.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AuthorsCreateManyArgs>(args?: SelectSubset<T, AuthorsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Authors and returns the data saved in the database.
+     * @param {AuthorsCreateManyAndReturnArgs} args - Arguments to create many Authors.
+     * @example
+     * // Create many Authors
+     * const authors = await prisma.authors.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Authors and only return the `id`
+     * const authorsWithIdOnly = await prisma.authors.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AuthorsCreateManyAndReturnArgs>(args?: SelectSubset<T, AuthorsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Authors.
+     * @param {AuthorsDeleteArgs} args - Arguments to delete one Authors.
+     * @example
+     * // Delete one Authors
+     * const Authors = await prisma.authors.delete({
+     *   where: {
+     *     // ... filter to delete one Authors
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AuthorsDeleteArgs>(args: SelectSubset<T, AuthorsDeleteArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Authors.
+     * @param {AuthorsUpdateArgs} args - Arguments to update one Authors.
+     * @example
+     * // Update one Authors
+     * const authors = await prisma.authors.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AuthorsUpdateArgs>(args: SelectSubset<T, AuthorsUpdateArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Authors.
+     * @param {AuthorsDeleteManyArgs} args - Arguments to filter Authors to delete.
+     * @example
+     * // Delete a few Authors
+     * const { count } = await prisma.authors.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AuthorsDeleteManyArgs>(args?: SelectSubset<T, AuthorsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Authors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuthorsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Authors
+     * const authors = await prisma.authors.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AuthorsUpdateManyArgs>(args: SelectSubset<T, AuthorsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Authors and returns the data updated in the database.
+     * @param {AuthorsUpdateManyAndReturnArgs} args - Arguments to update many Authors.
+     * @example
+     * // Update many Authors
+     * const authors = await prisma.authors.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Authors and only return the `id`
+     * const authorsWithIdOnly = await prisma.authors.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AuthorsUpdateManyAndReturnArgs>(args: SelectSubset<T, AuthorsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Authors.
+     * @param {AuthorsUpsertArgs} args - Arguments to update or create a Authors.
+     * @example
+     * // Update or create a Authors
+     * const authors = await prisma.authors.upsert({
+     *   create: {
+     *     // ... data to create a Authors
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Authors we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AuthorsUpsertArgs>(args: SelectSubset<T, AuthorsUpsertArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Authors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuthorsCountArgs} args - Arguments to filter Authors to count.
+     * @example
+     * // Count the number of Authors
+     * const count = await prisma.authors.count({
+     *   where: {
+     *     // ... the filter for the Authors we want to count
+     *   }
+     * })
+    **/
+    count<T extends AuthorsCountArgs>(
+      args?: Subset<T, AuthorsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AuthorsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Authors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuthorsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AuthorsAggregateArgs>(args: Subset<T, AuthorsAggregateArgs>): Prisma.PrismaPromise<GetAuthorsAggregateType<T>>
+
+    /**
+     * Group by Authors.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AuthorsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AuthorsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AuthorsGroupByArgs['orderBy'] }
+        : { orderBy?: AuthorsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AuthorsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAuthorsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Authors model
+   */
+  readonly fields: AuthorsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Authors.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AuthorsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Books<T extends Authors$BooksArgs<ExtArgs> = {}>(args?: Subset<T, Authors$BooksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BooksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Authors model
+   */
+  interface AuthorsFieldRefs {
+    readonly id: FieldRef<"Authors", 'Int'>
+    readonly name: FieldRef<"Authors", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Authors findUnique
+   */
+  export type AuthorsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+    /**
+     * Filter, which Authors to fetch.
+     */
+    where: AuthorsWhereUniqueInput
+  }
+
+  /**
+   * Authors findUniqueOrThrow
+   */
+  export type AuthorsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+    /**
+     * Filter, which Authors to fetch.
+     */
+    where: AuthorsWhereUniqueInput
+  }
+
+  /**
+   * Authors findFirst
+   */
+  export type AuthorsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+    /**
+     * Filter, which Authors to fetch.
+     */
+    where?: AuthorsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Authors to fetch.
+     */
+    orderBy?: AuthorsOrderByWithRelationInput | AuthorsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Authors.
+     */
+    cursor?: AuthorsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Authors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Authors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Authors.
+     */
+    distinct?: AuthorsScalarFieldEnum | AuthorsScalarFieldEnum[]
+  }
+
+  /**
+   * Authors findFirstOrThrow
+   */
+  export type AuthorsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+    /**
+     * Filter, which Authors to fetch.
+     */
+    where?: AuthorsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Authors to fetch.
+     */
+    orderBy?: AuthorsOrderByWithRelationInput | AuthorsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Authors.
+     */
+    cursor?: AuthorsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Authors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Authors.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Authors.
+     */
+    distinct?: AuthorsScalarFieldEnum | AuthorsScalarFieldEnum[]
+  }
+
+  /**
+   * Authors findMany
+   */
+  export type AuthorsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+    /**
+     * Filter, which Authors to fetch.
+     */
+    where?: AuthorsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Authors to fetch.
+     */
+    orderBy?: AuthorsOrderByWithRelationInput | AuthorsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Authors.
+     */
+    cursor?: AuthorsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Authors from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Authors.
+     */
+    skip?: number
+    distinct?: AuthorsScalarFieldEnum | AuthorsScalarFieldEnum[]
+  }
+
+  /**
+   * Authors create
+   */
+  export type AuthorsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Authors.
+     */
+    data: XOR<AuthorsCreateInput, AuthorsUncheckedCreateInput>
+  }
+
+  /**
+   * Authors createMany
+   */
+  export type AuthorsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Authors.
+     */
+    data: AuthorsCreateManyInput | AuthorsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Authors createManyAndReturn
+   */
+  export type AuthorsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * The data used to create many Authors.
+     */
+    data: AuthorsCreateManyInput | AuthorsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Authors update
+   */
+  export type AuthorsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Authors.
+     */
+    data: XOR<AuthorsUpdateInput, AuthorsUncheckedUpdateInput>
+    /**
+     * Choose, which Authors to update.
+     */
+    where: AuthorsWhereUniqueInput
+  }
+
+  /**
+   * Authors updateMany
+   */
+  export type AuthorsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Authors.
+     */
+    data: XOR<AuthorsUpdateManyMutationInput, AuthorsUncheckedUpdateManyInput>
+    /**
+     * Filter which Authors to update
+     */
+    where?: AuthorsWhereInput
+    /**
+     * Limit how many Authors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Authors updateManyAndReturn
+   */
+  export type AuthorsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * The data used to update Authors.
+     */
+    data: XOR<AuthorsUpdateManyMutationInput, AuthorsUncheckedUpdateManyInput>
+    /**
+     * Filter which Authors to update
+     */
+    where?: AuthorsWhereInput
+    /**
+     * Limit how many Authors to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Authors upsert
+   */
+  export type AuthorsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Authors to update in case it exists.
+     */
+    where: AuthorsWhereUniqueInput
+    /**
+     * In case the Authors found by the `where` argument doesn't exist, create a new Authors with this data.
+     */
+    create: XOR<AuthorsCreateInput, AuthorsUncheckedCreateInput>
+    /**
+     * In case the Authors was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AuthorsUpdateInput, AuthorsUncheckedUpdateInput>
+  }
+
+  /**
+   * Authors delete
+   */
+  export type AuthorsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+    /**
+     * Filter which Authors to delete.
+     */
+    where: AuthorsWhereUniqueInput
+  }
+
+  /**
+   * Authors deleteMany
+   */
+  export type AuthorsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Authors to delete
+     */
+    where?: AuthorsWhereInput
+    /**
+     * Limit how many Authors to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Authors.Books
+   */
+  export type Authors$BooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Books
+     */
+    select?: BooksSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Books
+     */
+    omit?: BooksOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BooksInclude<ExtArgs> | null
+    where?: BooksWhereInput
+    orderBy?: BooksOrderByWithRelationInput | BooksOrderByWithRelationInput[]
+    cursor?: BooksWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BooksScalarFieldEnum | BooksScalarFieldEnum[]
+  }
+
+  /**
+   * Authors without action
+   */
+  export type AuthorsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Authors
+     */
+    select?: AuthorsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Authors
+     */
+    omit?: AuthorsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuthorsInclude<ExtArgs> | null
+  }
+
 
   /**
    * Model Books
@@ -2583,344 +3648,380 @@ export namespace Prisma {
 
 
   /**
-   * Model Authors
+   * Model Comments
    */
 
-  export type AggregateAuthors = {
-    _count: AuthorsCountAggregateOutputType | null
-    _avg: AuthorsAvgAggregateOutputType | null
-    _sum: AuthorsSumAggregateOutputType | null
-    _min: AuthorsMinAggregateOutputType | null
-    _max: AuthorsMaxAggregateOutputType | null
+  export type AggregateComments = {
+    _count: CommentsCountAggregateOutputType | null
+    _avg: CommentsAvgAggregateOutputType | null
+    _sum: CommentsSumAggregateOutputType | null
+    _min: CommentsMinAggregateOutputType | null
+    _max: CommentsMaxAggregateOutputType | null
   }
 
-  export type AuthorsAvgAggregateOutputType = {
+  export type CommentsAvgAggregateOutputType = {
     id: number | null
+    user_id: number | null
+    book_id: number | null
   }
 
-  export type AuthorsSumAggregateOutputType = {
+  export type CommentsSumAggregateOutputType = {
     id: number | null
+    user_id: number | null
+    book_id: number | null
   }
 
-  export type AuthorsMinAggregateOutputType = {
+  export type CommentsMinAggregateOutputType = {
     id: number | null
-    name: string | null
+    comment: string | null
+    user_id: number | null
+    book_id: number | null
   }
 
-  export type AuthorsMaxAggregateOutputType = {
+  export type CommentsMaxAggregateOutputType = {
     id: number | null
-    name: string | null
+    comment: string | null
+    user_id: number | null
+    book_id: number | null
   }
 
-  export type AuthorsCountAggregateOutputType = {
+  export type CommentsCountAggregateOutputType = {
     id: number
-    name: number
+    comment: number
+    user_id: number
+    book_id: number
     _all: number
   }
 
 
-  export type AuthorsAvgAggregateInputType = {
+  export type CommentsAvgAggregateInputType = {
     id?: true
+    user_id?: true
+    book_id?: true
   }
 
-  export type AuthorsSumAggregateInputType = {
+  export type CommentsSumAggregateInputType = {
     id?: true
+    user_id?: true
+    book_id?: true
   }
 
-  export type AuthorsMinAggregateInputType = {
+  export type CommentsMinAggregateInputType = {
     id?: true
-    name?: true
+    comment?: true
+    user_id?: true
+    book_id?: true
   }
 
-  export type AuthorsMaxAggregateInputType = {
+  export type CommentsMaxAggregateInputType = {
     id?: true
-    name?: true
+    comment?: true
+    user_id?: true
+    book_id?: true
   }
 
-  export type AuthorsCountAggregateInputType = {
+  export type CommentsCountAggregateInputType = {
     id?: true
-    name?: true
+    comment?: true
+    user_id?: true
+    book_id?: true
     _all?: true
   }
 
-  export type AuthorsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Authors to aggregate.
+     * Filter which Comments to aggregate.
      */
-    where?: AuthorsWhereInput
+    where?: CommentsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Authors to fetch.
+     * Determine the order of Comments to fetch.
      */
-    orderBy?: AuthorsOrderByWithRelationInput | AuthorsOrderByWithRelationInput[]
+    orderBy?: CommentsOrderByWithRelationInput | CommentsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: AuthorsWhereUniqueInput
+    cursor?: CommentsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Authors from the position of the cursor.
+     * Take `±n` Comments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Authors.
+     * Skip the first `n` Comments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Authors
+     * Count returned Comments
     **/
-    _count?: true | AuthorsCountAggregateInputType
+    _count?: true | CommentsCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: AuthorsAvgAggregateInputType
+    _avg?: CommentsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: AuthorsSumAggregateInputType
+    _sum?: CommentsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: AuthorsMinAggregateInputType
+    _min?: CommentsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: AuthorsMaxAggregateInputType
+    _max?: CommentsMaxAggregateInputType
   }
 
-  export type GetAuthorsAggregateType<T extends AuthorsAggregateArgs> = {
-        [P in keyof T & keyof AggregateAuthors]: P extends '_count' | 'count'
+  export type GetCommentsAggregateType<T extends CommentsAggregateArgs> = {
+        [P in keyof T & keyof AggregateComments]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateAuthors[P]>
-      : GetScalarType<T[P], AggregateAuthors[P]>
+        : GetScalarType<T[P], AggregateComments[P]>
+      : GetScalarType<T[P], AggregateComments[P]>
   }
 
 
 
 
-  export type AuthorsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AuthorsWhereInput
-    orderBy?: AuthorsOrderByWithAggregationInput | AuthorsOrderByWithAggregationInput[]
-    by: AuthorsScalarFieldEnum[] | AuthorsScalarFieldEnum
-    having?: AuthorsScalarWhereWithAggregatesInput
+  export type CommentsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentsWhereInput
+    orderBy?: CommentsOrderByWithAggregationInput | CommentsOrderByWithAggregationInput[]
+    by: CommentsScalarFieldEnum[] | CommentsScalarFieldEnum
+    having?: CommentsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: AuthorsCountAggregateInputType | true
-    _avg?: AuthorsAvgAggregateInputType
-    _sum?: AuthorsSumAggregateInputType
-    _min?: AuthorsMinAggregateInputType
-    _max?: AuthorsMaxAggregateInputType
+    _count?: CommentsCountAggregateInputType | true
+    _avg?: CommentsAvgAggregateInputType
+    _sum?: CommentsSumAggregateInputType
+    _min?: CommentsMinAggregateInputType
+    _max?: CommentsMaxAggregateInputType
   }
 
-  export type AuthorsGroupByOutputType = {
+  export type CommentsGroupByOutputType = {
     id: number
-    name: string
-    _count: AuthorsCountAggregateOutputType | null
-    _avg: AuthorsAvgAggregateOutputType | null
-    _sum: AuthorsSumAggregateOutputType | null
-    _min: AuthorsMinAggregateOutputType | null
-    _max: AuthorsMaxAggregateOutputType | null
+    comment: string
+    user_id: number
+    book_id: number
+    _count: CommentsCountAggregateOutputType | null
+    _avg: CommentsAvgAggregateOutputType | null
+    _sum: CommentsSumAggregateOutputType | null
+    _min: CommentsMinAggregateOutputType | null
+    _max: CommentsMaxAggregateOutputType | null
   }
 
-  type GetAuthorsGroupByPayload<T extends AuthorsGroupByArgs> = Prisma.PrismaPromise<
+  type GetCommentsGroupByPayload<T extends CommentsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<AuthorsGroupByOutputType, T['by']> &
+      PickEnumerable<CommentsGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof AuthorsGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof CommentsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], AuthorsGroupByOutputType[P]>
-            : GetScalarType<T[P], AuthorsGroupByOutputType[P]>
+              : GetScalarType<T[P], CommentsGroupByOutputType[P]>
+            : GetScalarType<T[P], CommentsGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type AuthorsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CommentsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    Books?: boolean | Authors$BooksArgs<ExtArgs>
-    _count?: boolean | AuthorsCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["authors"]>
+    comment?: boolean
+    user_id?: boolean
+    book_id?: boolean
+    Users?: boolean | UsersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comments"]>
 
-  export type AuthorsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CommentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-  }, ExtArgs["result"]["authors"]>
+    comment?: boolean
+    user_id?: boolean
+    book_id?: boolean
+    Users?: boolean | UsersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comments"]>
 
-  export type AuthorsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CommentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-  }, ExtArgs["result"]["authors"]>
+    comment?: boolean
+    user_id?: boolean
+    book_id?: boolean
+    Users?: boolean | UsersDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["comments"]>
 
-  export type AuthorsSelectScalar = {
+  export type CommentsSelectScalar = {
     id?: boolean
-    name?: boolean
+    comment?: boolean
+    user_id?: boolean
+    book_id?: boolean
   }
 
-  export type AuthorsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["authors"]>
-  export type AuthorsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Books?: boolean | Authors$BooksArgs<ExtArgs>
-    _count?: boolean | AuthorsCountOutputTypeDefaultArgs<ExtArgs>
+  export type CommentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "comment" | "user_id" | "book_id", ExtArgs["result"]["comments"]>
+  export type CommentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Users?: boolean | UsersDefaultArgs<ExtArgs>
   }
-  export type AuthorsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type AuthorsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CommentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Users?: boolean | UsersDefaultArgs<ExtArgs>
+  }
+  export type CommentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Users?: boolean | UsersDefaultArgs<ExtArgs>
+  }
 
-  export type $AuthorsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Authors"
+  export type $CommentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Comments"
     objects: {
-      Books: Prisma.$BooksPayload<ExtArgs>[]
+      Users: Prisma.$UsersPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      name: string
-    }, ExtArgs["result"]["authors"]>
+      comment: string
+      user_id: number
+      book_id: number
+    }, ExtArgs["result"]["comments"]>
     composites: {}
   }
 
-  type AuthorsGetPayload<S extends boolean | null | undefined | AuthorsDefaultArgs> = $Result.GetResult<Prisma.$AuthorsPayload, S>
+  type CommentsGetPayload<S extends boolean | null | undefined | CommentsDefaultArgs> = $Result.GetResult<Prisma.$CommentsPayload, S>
 
-  type AuthorsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AuthorsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AuthorsCountAggregateInputType | true
+  type CommentsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CommentsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CommentsCountAggregateInputType | true
     }
 
-  export interface AuthorsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Authors'], meta: { name: 'Authors' } }
+  export interface CommentsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Comments'], meta: { name: 'Comments' } }
     /**
-     * Find zero or one Authors that matches the filter.
-     * @param {AuthorsFindUniqueArgs} args - Arguments to find a Authors
+     * Find zero or one Comments that matches the filter.
+     * @param {CommentsFindUniqueArgs} args - Arguments to find a Comments
      * @example
-     * // Get one Authors
-     * const authors = await prisma.authors.findUnique({
+     * // Get one Comments
+     * const comments = await prisma.comments.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends AuthorsFindUniqueArgs>(args: SelectSubset<T, AuthorsFindUniqueArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends CommentsFindUniqueArgs>(args: SelectSubset<T, CommentsFindUniqueArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Authors that matches the filter or throw an error with `error.code='P2025'`
+     * Find one Comments that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {AuthorsFindUniqueOrThrowArgs} args - Arguments to find a Authors
+     * @param {CommentsFindUniqueOrThrowArgs} args - Arguments to find a Comments
      * @example
-     * // Get one Authors
-     * const authors = await prisma.authors.findUniqueOrThrow({
+     * // Get one Comments
+     * const comments = await prisma.comments.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends AuthorsFindUniqueOrThrowArgs>(args: SelectSubset<T, AuthorsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends CommentsFindUniqueOrThrowArgs>(args: SelectSubset<T, CommentsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Authors that matches the filter.
+     * Find the first Comments that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AuthorsFindFirstArgs} args - Arguments to find a Authors
+     * @param {CommentsFindFirstArgs} args - Arguments to find a Comments
      * @example
-     * // Get one Authors
-     * const authors = await prisma.authors.findFirst({
+     * // Get one Comments
+     * const comments = await prisma.comments.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends AuthorsFindFirstArgs>(args?: SelectSubset<T, AuthorsFindFirstArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends CommentsFindFirstArgs>(args?: SelectSubset<T, CommentsFindFirstArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Authors that matches the filter or
+     * Find the first Comments that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AuthorsFindFirstOrThrowArgs} args - Arguments to find a Authors
+     * @param {CommentsFindFirstOrThrowArgs} args - Arguments to find a Comments
      * @example
-     * // Get one Authors
-     * const authors = await prisma.authors.findFirstOrThrow({
+     * // Get one Comments
+     * const comments = await prisma.comments.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends AuthorsFindFirstOrThrowArgs>(args?: SelectSubset<T, AuthorsFindFirstOrThrowArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends CommentsFindFirstOrThrowArgs>(args?: SelectSubset<T, CommentsFindFirstOrThrowArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Authors that matches the filter.
+     * Find zero or more Comments that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AuthorsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {CommentsFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Authors
-     * const authors = await prisma.authors.findMany()
+     * // Get all Comments
+     * const comments = await prisma.comments.findMany()
      * 
-     * // Get first 10 Authors
-     * const authors = await prisma.authors.findMany({ take: 10 })
+     * // Get first 10 Comments
+     * const comments = await prisma.comments.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const authorsWithIdOnly = await prisma.authors.findMany({ select: { id: true } })
+     * const commentsWithIdOnly = await prisma.comments.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends AuthorsFindManyArgs>(args?: SelectSubset<T, AuthorsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends CommentsFindManyArgs>(args?: SelectSubset<T, CommentsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Authors.
-     * @param {AuthorsCreateArgs} args - Arguments to create a Authors.
+     * Create a Comments.
+     * @param {CommentsCreateArgs} args - Arguments to create a Comments.
      * @example
-     * // Create one Authors
-     * const Authors = await prisma.authors.create({
+     * // Create one Comments
+     * const Comments = await prisma.comments.create({
      *   data: {
-     *     // ... data to create a Authors
+     *     // ... data to create a Comments
      *   }
      * })
      * 
      */
-    create<T extends AuthorsCreateArgs>(args: SelectSubset<T, AuthorsCreateArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends CommentsCreateArgs>(args: SelectSubset<T, CommentsCreateArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Authors.
-     * @param {AuthorsCreateManyArgs} args - Arguments to create many Authors.
+     * Create many Comments.
+     * @param {CommentsCreateManyArgs} args - Arguments to create many Comments.
      * @example
-     * // Create many Authors
-     * const authors = await prisma.authors.createMany({
+     * // Create many Comments
+     * const comments = await prisma.comments.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends AuthorsCreateManyArgs>(args?: SelectSubset<T, AuthorsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends CommentsCreateManyArgs>(args?: SelectSubset<T, CommentsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Authors and returns the data saved in the database.
-     * @param {AuthorsCreateManyAndReturnArgs} args - Arguments to create many Authors.
+     * Create many Comments and returns the data saved in the database.
+     * @param {CommentsCreateManyAndReturnArgs} args - Arguments to create many Comments.
      * @example
-     * // Create many Authors
-     * const authors = await prisma.authors.createManyAndReturn({
+     * // Create many Comments
+     * const comments = await prisma.comments.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Authors and only return the `id`
-     * const authorsWithIdOnly = await prisma.authors.createManyAndReturn({
+     * // Create many Comments and only return the `id`
+     * const commentsWithIdOnly = await prisma.comments.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -2930,28 +4031,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends AuthorsCreateManyAndReturnArgs>(args?: SelectSubset<T, AuthorsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends CommentsCreateManyAndReturnArgs>(args?: SelectSubset<T, CommentsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Authors.
-     * @param {AuthorsDeleteArgs} args - Arguments to delete one Authors.
+     * Delete a Comments.
+     * @param {CommentsDeleteArgs} args - Arguments to delete one Comments.
      * @example
-     * // Delete one Authors
-     * const Authors = await prisma.authors.delete({
+     * // Delete one Comments
+     * const Comments = await prisma.comments.delete({
      *   where: {
-     *     // ... filter to delete one Authors
+     *     // ... filter to delete one Comments
      *   }
      * })
      * 
      */
-    delete<T extends AuthorsDeleteArgs>(args: SelectSubset<T, AuthorsDeleteArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends CommentsDeleteArgs>(args: SelectSubset<T, CommentsDeleteArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Authors.
-     * @param {AuthorsUpdateArgs} args - Arguments to update one Authors.
+     * Update one Comments.
+     * @param {CommentsUpdateArgs} args - Arguments to update one Comments.
      * @example
-     * // Update one Authors
-     * const authors = await prisma.authors.update({
+     * // Update one Comments
+     * const comments = await prisma.comments.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2961,30 +4062,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends AuthorsUpdateArgs>(args: SelectSubset<T, AuthorsUpdateArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends CommentsUpdateArgs>(args: SelectSubset<T, CommentsUpdateArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Authors.
-     * @param {AuthorsDeleteManyArgs} args - Arguments to filter Authors to delete.
+     * Delete zero or more Comments.
+     * @param {CommentsDeleteManyArgs} args - Arguments to filter Comments to delete.
      * @example
-     * // Delete a few Authors
-     * const { count } = await prisma.authors.deleteMany({
+     * // Delete a few Comments
+     * const { count } = await prisma.comments.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends AuthorsDeleteManyArgs>(args?: SelectSubset<T, AuthorsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends CommentsDeleteManyArgs>(args?: SelectSubset<T, CommentsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Authors.
+     * Update zero or more Comments.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AuthorsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {CommentsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Authors
-     * const authors = await prisma.authors.updateMany({
+     * // Update many Comments
+     * const comments = await prisma.comments.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2994,14 +4095,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends AuthorsUpdateManyArgs>(args: SelectSubset<T, AuthorsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends CommentsUpdateManyArgs>(args: SelectSubset<T, CommentsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Authors and returns the data updated in the database.
-     * @param {AuthorsUpdateManyAndReturnArgs} args - Arguments to update many Authors.
+     * Update zero or more Comments and returns the data updated in the database.
+     * @param {CommentsUpdateManyAndReturnArgs} args - Arguments to update many Comments.
      * @example
-     * // Update many Authors
-     * const authors = await prisma.authors.updateManyAndReturn({
+     * // Update many Comments
+     * const comments = await prisma.comments.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -3010,8 +4111,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Authors and only return the `id`
-     * const authorsWithIdOnly = await prisma.authors.updateManyAndReturn({
+     * // Update zero or more Comments and only return the `id`
+     * const commentsWithIdOnly = await prisma.comments.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -3024,56 +4125,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends AuthorsUpdateManyAndReturnArgs>(args: SelectSubset<T, AuthorsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends CommentsUpdateManyAndReturnArgs>(args: SelectSubset<T, CommentsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Authors.
-     * @param {AuthorsUpsertArgs} args - Arguments to update or create a Authors.
+     * Create or update one Comments.
+     * @param {CommentsUpsertArgs} args - Arguments to update or create a Comments.
      * @example
-     * // Update or create a Authors
-     * const authors = await prisma.authors.upsert({
+     * // Update or create a Comments
+     * const comments = await prisma.comments.upsert({
      *   create: {
-     *     // ... data to create a Authors
+     *     // ... data to create a Comments
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Authors we want to update
+     *     // ... the filter for the Comments we want to update
      *   }
      * })
      */
-    upsert<T extends AuthorsUpsertArgs>(args: SelectSubset<T, AuthorsUpsertArgs<ExtArgs>>): Prisma__AuthorsClient<$Result.GetResult<Prisma.$AuthorsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends CommentsUpsertArgs>(args: SelectSubset<T, CommentsUpsertArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Authors.
+     * Count the number of Comments.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AuthorsCountArgs} args - Arguments to filter Authors to count.
+     * @param {CommentsCountArgs} args - Arguments to filter Comments to count.
      * @example
-     * // Count the number of Authors
-     * const count = await prisma.authors.count({
+     * // Count the number of Comments
+     * const count = await prisma.comments.count({
      *   where: {
-     *     // ... the filter for the Authors we want to count
+     *     // ... the filter for the Comments we want to count
      *   }
      * })
     **/
-    count<T extends AuthorsCountArgs>(
-      args?: Subset<T, AuthorsCountArgs>,
+    count<T extends CommentsCountArgs>(
+      args?: Subset<T, CommentsCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], AuthorsCountAggregateOutputType>
+          : GetScalarType<T['select'], CommentsCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Authors.
+     * Allows you to perform aggregations operations on a Comments.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AuthorsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {CommentsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -3093,13 +4194,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends AuthorsAggregateArgs>(args: Subset<T, AuthorsAggregateArgs>): Prisma.PrismaPromise<GetAuthorsAggregateType<T>>
+    aggregate<T extends CommentsAggregateArgs>(args: Subset<T, CommentsAggregateArgs>): Prisma.PrismaPromise<GetCommentsAggregateType<T>>
 
     /**
-     * Group by Authors.
+     * Group by Comments.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AuthorsGroupByArgs} args - Group by arguments.
+     * @param {CommentsGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -3114,14 +4215,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends AuthorsGroupByArgs,
+      T extends CommentsGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AuthorsGroupByArgs['orderBy'] }
-        : { orderBy?: AuthorsGroupByArgs['orderBy'] },
+        ? { orderBy: CommentsGroupByArgs['orderBy'] }
+        : { orderBy?: CommentsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3170,22 +4271,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, AuthorsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAuthorsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, CommentsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommentsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Authors model
+   * Fields of the Comments model
    */
-  readonly fields: AuthorsFieldRefs;
+  readonly fields: CommentsFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Authors.
+   * The delegate class that acts as a "Promise-like" for Comments.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__AuthorsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CommentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Books<T extends Authors$BooksArgs<ExtArgs> = {}>(args?: Subset<T, Authors$BooksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BooksPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Users<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3212,438 +4313,424 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Authors model
+   * Fields of the Comments model
    */
-  interface AuthorsFieldRefs {
-    readonly id: FieldRef<"Authors", 'Int'>
-    readonly name: FieldRef<"Authors", 'String'>
+  interface CommentsFieldRefs {
+    readonly id: FieldRef<"Comments", 'Int'>
+    readonly comment: FieldRef<"Comments", 'String'>
+    readonly user_id: FieldRef<"Comments", 'Int'>
+    readonly book_id: FieldRef<"Comments", 'Int'>
   }
     
 
   // Custom InputTypes
   /**
-   * Authors findUnique
+   * Comments findUnique
    */
-  export type AuthorsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Authors
+     * Select specific fields to fetch from the Comments
      */
-    select?: AuthorsSelect<ExtArgs> | null
+    select?: CommentsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Authors
+     * Omit specific fields from the Comments
      */
-    omit?: AuthorsOmit<ExtArgs> | null
+    omit?: CommentsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AuthorsInclude<ExtArgs> | null
+    include?: CommentsInclude<ExtArgs> | null
     /**
-     * Filter, which Authors to fetch.
+     * Filter, which Comments to fetch.
      */
-    where: AuthorsWhereUniqueInput
+    where: CommentsWhereUniqueInput
   }
 
   /**
-   * Authors findUniqueOrThrow
+   * Comments findUniqueOrThrow
    */
-  export type AuthorsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Authors
+     * Select specific fields to fetch from the Comments
      */
-    select?: AuthorsSelect<ExtArgs> | null
+    select?: CommentsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Authors
+     * Omit specific fields from the Comments
      */
-    omit?: AuthorsOmit<ExtArgs> | null
+    omit?: CommentsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AuthorsInclude<ExtArgs> | null
+    include?: CommentsInclude<ExtArgs> | null
     /**
-     * Filter, which Authors to fetch.
+     * Filter, which Comments to fetch.
      */
-    where: AuthorsWhereUniqueInput
+    where: CommentsWhereUniqueInput
   }
 
   /**
-   * Authors findFirst
+   * Comments findFirst
    */
-  export type AuthorsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Authors
+     * Select specific fields to fetch from the Comments
      */
-    select?: AuthorsSelect<ExtArgs> | null
+    select?: CommentsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Authors
+     * Omit specific fields from the Comments
      */
-    omit?: AuthorsOmit<ExtArgs> | null
+    omit?: CommentsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AuthorsInclude<ExtArgs> | null
+    include?: CommentsInclude<ExtArgs> | null
     /**
-     * Filter, which Authors to fetch.
+     * Filter, which Comments to fetch.
      */
-    where?: AuthorsWhereInput
+    where?: CommentsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Authors to fetch.
+     * Determine the order of Comments to fetch.
      */
-    orderBy?: AuthorsOrderByWithRelationInput | AuthorsOrderByWithRelationInput[]
+    orderBy?: CommentsOrderByWithRelationInput | CommentsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Authors.
+     * Sets the position for searching for Comments.
      */
-    cursor?: AuthorsWhereUniqueInput
+    cursor?: CommentsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Authors from the position of the cursor.
+     * Take `±n` Comments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Authors.
+     * Skip the first `n` Comments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Authors.
+     * Filter by unique combinations of Comments.
      */
-    distinct?: AuthorsScalarFieldEnum | AuthorsScalarFieldEnum[]
+    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
   }
 
   /**
-   * Authors findFirstOrThrow
+   * Comments findFirstOrThrow
    */
-  export type AuthorsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Authors
+     * Select specific fields to fetch from the Comments
      */
-    select?: AuthorsSelect<ExtArgs> | null
+    select?: CommentsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Authors
+     * Omit specific fields from the Comments
      */
-    omit?: AuthorsOmit<ExtArgs> | null
+    omit?: CommentsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AuthorsInclude<ExtArgs> | null
+    include?: CommentsInclude<ExtArgs> | null
     /**
-     * Filter, which Authors to fetch.
+     * Filter, which Comments to fetch.
      */
-    where?: AuthorsWhereInput
+    where?: CommentsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Authors to fetch.
+     * Determine the order of Comments to fetch.
      */
-    orderBy?: AuthorsOrderByWithRelationInput | AuthorsOrderByWithRelationInput[]
+    orderBy?: CommentsOrderByWithRelationInput | CommentsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Authors.
+     * Sets the position for searching for Comments.
      */
-    cursor?: AuthorsWhereUniqueInput
+    cursor?: CommentsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Authors from the position of the cursor.
+     * Take `±n` Comments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Authors.
+     * Skip the first `n` Comments.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Authors.
+     * Filter by unique combinations of Comments.
      */
-    distinct?: AuthorsScalarFieldEnum | AuthorsScalarFieldEnum[]
+    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
   }
 
   /**
-   * Authors findMany
+   * Comments findMany
    */
-  export type AuthorsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Authors
+     * Select specific fields to fetch from the Comments
      */
-    select?: AuthorsSelect<ExtArgs> | null
+    select?: CommentsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Authors
+     * Omit specific fields from the Comments
      */
-    omit?: AuthorsOmit<ExtArgs> | null
+    omit?: CommentsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AuthorsInclude<ExtArgs> | null
+    include?: CommentsInclude<ExtArgs> | null
     /**
-     * Filter, which Authors to fetch.
+     * Filter, which Comments to fetch.
      */
-    where?: AuthorsWhereInput
+    where?: CommentsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Authors to fetch.
+     * Determine the order of Comments to fetch.
      */
-    orderBy?: AuthorsOrderByWithRelationInput | AuthorsOrderByWithRelationInput[]
+    orderBy?: CommentsOrderByWithRelationInput | CommentsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Authors.
+     * Sets the position for listing Comments.
      */
-    cursor?: AuthorsWhereUniqueInput
+    cursor?: CommentsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Authors from the position of the cursor.
+     * Take `±n` Comments from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Authors.
+     * Skip the first `n` Comments.
      */
     skip?: number
-    distinct?: AuthorsScalarFieldEnum | AuthorsScalarFieldEnum[]
+    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
   }
 
   /**
-   * Authors create
+   * Comments create
    */
-  export type AuthorsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Authors
+     * Select specific fields to fetch from the Comments
      */
-    select?: AuthorsSelect<ExtArgs> | null
+    select?: CommentsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Authors
+     * Omit specific fields from the Comments
      */
-    omit?: AuthorsOmit<ExtArgs> | null
+    omit?: CommentsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AuthorsInclude<ExtArgs> | null
+    include?: CommentsInclude<ExtArgs> | null
     /**
-     * The data needed to create a Authors.
+     * The data needed to create a Comments.
      */
-    data: XOR<AuthorsCreateInput, AuthorsUncheckedCreateInput>
+    data: XOR<CommentsCreateInput, CommentsUncheckedCreateInput>
   }
 
   /**
-   * Authors createMany
+   * Comments createMany
    */
-  export type AuthorsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Authors.
+     * The data used to create many Comments.
      */
-    data: AuthorsCreateManyInput | AuthorsCreateManyInput[]
+    data: CommentsCreateManyInput | CommentsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Authors createManyAndReturn
+   * Comments createManyAndReturn
    */
-  export type AuthorsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Authors
+     * Select specific fields to fetch from the Comments
      */
-    select?: AuthorsSelectCreateManyAndReturn<ExtArgs> | null
+    select?: CommentsSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Authors
+     * Omit specific fields from the Comments
      */
-    omit?: AuthorsOmit<ExtArgs> | null
+    omit?: CommentsOmit<ExtArgs> | null
     /**
-     * The data used to create many Authors.
+     * The data used to create many Comments.
      */
-    data: AuthorsCreateManyInput | AuthorsCreateManyInput[]
+    data: CommentsCreateManyInput | CommentsCreateManyInput[]
     skipDuplicates?: boolean
-  }
-
-  /**
-   * Authors update
-   */
-  export type AuthorsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Authors
-     */
-    select?: AuthorsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Authors
-     */
-    omit?: AuthorsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AuthorsInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Authors.
-     */
-    data: XOR<AuthorsUpdateInput, AuthorsUncheckedUpdateInput>
-    /**
-     * Choose, which Authors to update.
-     */
-    where: AuthorsWhereUniqueInput
+    include?: CommentsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * Authors updateMany
+   * Comments update
    */
-  export type AuthorsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Authors.
+     * Select specific fields to fetch from the Comments
      */
-    data: XOR<AuthorsUpdateManyMutationInput, AuthorsUncheckedUpdateManyInput>
+    select?: CommentsSelect<ExtArgs> | null
     /**
-     * Filter which Authors to update
+     * Omit specific fields from the Comments
      */
-    where?: AuthorsWhereInput
+    omit?: CommentsOmit<ExtArgs> | null
     /**
-     * Limit how many Authors to update.
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Comments.
+     */
+    data: XOR<CommentsUpdateInput, CommentsUncheckedUpdateInput>
+    /**
+     * Choose, which Comments to update.
+     */
+    where: CommentsWhereUniqueInput
+  }
+
+  /**
+   * Comments updateMany
+   */
+  export type CommentsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Comments.
+     */
+    data: XOR<CommentsUpdateManyMutationInput, CommentsUncheckedUpdateManyInput>
+    /**
+     * Filter which Comments to update
+     */
+    where?: CommentsWhereInput
+    /**
+     * Limit how many Comments to update.
      */
     limit?: number
   }
 
   /**
-   * Authors updateManyAndReturn
+   * Comments updateManyAndReturn
    */
-  export type AuthorsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Authors
+     * Select specific fields to fetch from the Comments
      */
-    select?: AuthorsSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: CommentsSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Authors
+     * Omit specific fields from the Comments
      */
-    omit?: AuthorsOmit<ExtArgs> | null
+    omit?: CommentsOmit<ExtArgs> | null
     /**
-     * The data used to update Authors.
+     * The data used to update Comments.
      */
-    data: XOR<AuthorsUpdateManyMutationInput, AuthorsUncheckedUpdateManyInput>
+    data: XOR<CommentsUpdateManyMutationInput, CommentsUncheckedUpdateManyInput>
     /**
-     * Filter which Authors to update
+     * Filter which Comments to update
      */
-    where?: AuthorsWhereInput
+    where?: CommentsWhereInput
     /**
-     * Limit how many Authors to update.
+     * Limit how many Comments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Comments upsert
+   */
+  export type CommentsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comments
+     */
+    select?: CommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comments
+     */
+    omit?: CommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Comments to update in case it exists.
+     */
+    where: CommentsWhereUniqueInput
+    /**
+     * In case the Comments found by the `where` argument doesn't exist, create a new Comments with this data.
+     */
+    create: XOR<CommentsCreateInput, CommentsUncheckedCreateInput>
+    /**
+     * In case the Comments was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CommentsUpdateInput, CommentsUncheckedUpdateInput>
+  }
+
+  /**
+   * Comments delete
+   */
+  export type CommentsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comments
+     */
+    select?: CommentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comments
+     */
+    omit?: CommentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentsInclude<ExtArgs> | null
+    /**
+     * Filter which Comments to delete.
+     */
+    where: CommentsWhereUniqueInput
+  }
+
+  /**
+   * Comments deleteMany
+   */
+  export type CommentsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Comments to delete
+     */
+    where?: CommentsWhereInput
+    /**
+     * Limit how many Comments to delete.
      */
     limit?: number
   }
 
   /**
-   * Authors upsert
+   * Comments without action
    */
-  export type AuthorsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CommentsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Authors
+     * Select specific fields to fetch from the Comments
      */
-    select?: AuthorsSelect<ExtArgs> | null
+    select?: CommentsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Authors
+     * Omit specific fields from the Comments
      */
-    omit?: AuthorsOmit<ExtArgs> | null
+    omit?: CommentsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: AuthorsInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Authors to update in case it exists.
-     */
-    where: AuthorsWhereUniqueInput
-    /**
-     * In case the Authors found by the `where` argument doesn't exist, create a new Authors with this data.
-     */
-    create: XOR<AuthorsCreateInput, AuthorsUncheckedCreateInput>
-    /**
-     * In case the Authors was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<AuthorsUpdateInput, AuthorsUncheckedUpdateInput>
-  }
-
-  /**
-   * Authors delete
-   */
-  export type AuthorsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Authors
-     */
-    select?: AuthorsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Authors
-     */
-    omit?: AuthorsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AuthorsInclude<ExtArgs> | null
-    /**
-     * Filter which Authors to delete.
-     */
-    where: AuthorsWhereUniqueInput
-  }
-
-  /**
-   * Authors deleteMany
-   */
-  export type AuthorsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Authors to delete
-     */
-    where?: AuthorsWhereInput
-    /**
-     * Limit how many Authors to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Authors.Books
-   */
-  export type Authors$BooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Books
-     */
-    select?: BooksSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Books
-     */
-    omit?: BooksOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BooksInclude<ExtArgs> | null
-    where?: BooksWhereInput
-    orderBy?: BooksOrderByWithRelationInput | BooksOrderByWithRelationInput[]
-    cursor?: BooksWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BooksScalarFieldEnum | BooksScalarFieldEnum[]
-  }
-
-  /**
-   * Authors without action
-   */
-  export type AuthorsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Authors
-     */
-    select?: AuthorsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Authors
-     */
-    omit?: AuthorsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AuthorsInclude<ExtArgs> | null
+    include?: CommentsInclude<ExtArgs> | null
   }
 
 
@@ -6991,1093 +8078,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Comments
-   */
-
-  export type AggregateComments = {
-    _count: CommentsCountAggregateOutputType | null
-    _avg: CommentsAvgAggregateOutputType | null
-    _sum: CommentsSumAggregateOutputType | null
-    _min: CommentsMinAggregateOutputType | null
-    _max: CommentsMaxAggregateOutputType | null
-  }
-
-  export type CommentsAvgAggregateOutputType = {
-    id: number | null
-    user_id: number | null
-    book_id: number | null
-  }
-
-  export type CommentsSumAggregateOutputType = {
-    id: number | null
-    user_id: number | null
-    book_id: number | null
-  }
-
-  export type CommentsMinAggregateOutputType = {
-    id: number | null
-    comment: string | null
-    user_id: number | null
-    book_id: number | null
-  }
-
-  export type CommentsMaxAggregateOutputType = {
-    id: number | null
-    comment: string | null
-    user_id: number | null
-    book_id: number | null
-  }
-
-  export type CommentsCountAggregateOutputType = {
-    id: number
-    comment: number
-    user_id: number
-    book_id: number
-    _all: number
-  }
-
-
-  export type CommentsAvgAggregateInputType = {
-    id?: true
-    user_id?: true
-    book_id?: true
-  }
-
-  export type CommentsSumAggregateInputType = {
-    id?: true
-    user_id?: true
-    book_id?: true
-  }
-
-  export type CommentsMinAggregateInputType = {
-    id?: true
-    comment?: true
-    user_id?: true
-    book_id?: true
-  }
-
-  export type CommentsMaxAggregateInputType = {
-    id?: true
-    comment?: true
-    user_id?: true
-    book_id?: true
-  }
-
-  export type CommentsCountAggregateInputType = {
-    id?: true
-    comment?: true
-    user_id?: true
-    book_id?: true
-    _all?: true
-  }
-
-  export type CommentsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Comments to aggregate.
-     */
-    where?: CommentsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Comments to fetch.
-     */
-    orderBy?: CommentsOrderByWithRelationInput | CommentsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: CommentsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Comments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Comments.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Comments
-    **/
-    _count?: true | CommentsCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: CommentsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: CommentsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: CommentsMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: CommentsMaxAggregateInputType
-  }
-
-  export type GetCommentsAggregateType<T extends CommentsAggregateArgs> = {
-        [P in keyof T & keyof AggregateComments]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateComments[P]>
-      : GetScalarType<T[P], AggregateComments[P]>
-  }
-
-
-
-
-  export type CommentsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CommentsWhereInput
-    orderBy?: CommentsOrderByWithAggregationInput | CommentsOrderByWithAggregationInput[]
-    by: CommentsScalarFieldEnum[] | CommentsScalarFieldEnum
-    having?: CommentsScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: CommentsCountAggregateInputType | true
-    _avg?: CommentsAvgAggregateInputType
-    _sum?: CommentsSumAggregateInputType
-    _min?: CommentsMinAggregateInputType
-    _max?: CommentsMaxAggregateInputType
-  }
-
-  export type CommentsGroupByOutputType = {
-    id: number
-    comment: string
-    user_id: number
-    book_id: number
-    _count: CommentsCountAggregateOutputType | null
-    _avg: CommentsAvgAggregateOutputType | null
-    _sum: CommentsSumAggregateOutputType | null
-    _min: CommentsMinAggregateOutputType | null
-    _max: CommentsMaxAggregateOutputType | null
-  }
-
-  type GetCommentsGroupByPayload<T extends CommentsGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<CommentsGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof CommentsGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], CommentsGroupByOutputType[P]>
-            : GetScalarType<T[P], CommentsGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type CommentsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    comment?: boolean
-    user_id?: boolean
-    book_id?: boolean
-    Users?: boolean | UsersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["comments"]>
-
-  export type CommentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    comment?: boolean
-    user_id?: boolean
-    book_id?: boolean
-    Users?: boolean | UsersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["comments"]>
-
-  export type CommentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    comment?: boolean
-    user_id?: boolean
-    book_id?: boolean
-    Users?: boolean | UsersDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["comments"]>
-
-  export type CommentsSelectScalar = {
-    id?: boolean
-    comment?: boolean
-    user_id?: boolean
-    book_id?: boolean
-  }
-
-  export type CommentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "comment" | "user_id" | "book_id", ExtArgs["result"]["comments"]>
-  export type CommentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Users?: boolean | UsersDefaultArgs<ExtArgs>
-  }
-  export type CommentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Users?: boolean | UsersDefaultArgs<ExtArgs>
-  }
-  export type CommentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Users?: boolean | UsersDefaultArgs<ExtArgs>
-  }
-
-  export type $CommentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Comments"
-    objects: {
-      Users: Prisma.$UsersPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      comment: string
-      user_id: number
-      book_id: number
-    }, ExtArgs["result"]["comments"]>
-    composites: {}
-  }
-
-  type CommentsGetPayload<S extends boolean | null | undefined | CommentsDefaultArgs> = $Result.GetResult<Prisma.$CommentsPayload, S>
-
-  type CommentsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CommentsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CommentsCountAggregateInputType | true
-    }
-
-  export interface CommentsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Comments'], meta: { name: 'Comments' } }
-    /**
-     * Find zero or one Comments that matches the filter.
-     * @param {CommentsFindUniqueArgs} args - Arguments to find a Comments
-     * @example
-     * // Get one Comments
-     * const comments = await prisma.comments.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends CommentsFindUniqueArgs>(args: SelectSubset<T, CommentsFindUniqueArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Comments that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {CommentsFindUniqueOrThrowArgs} args - Arguments to find a Comments
-     * @example
-     * // Get one Comments
-     * const comments = await prisma.comments.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends CommentsFindUniqueOrThrowArgs>(args: SelectSubset<T, CommentsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Comments that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CommentsFindFirstArgs} args - Arguments to find a Comments
-     * @example
-     * // Get one Comments
-     * const comments = await prisma.comments.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends CommentsFindFirstArgs>(args?: SelectSubset<T, CommentsFindFirstArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Comments that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CommentsFindFirstOrThrowArgs} args - Arguments to find a Comments
-     * @example
-     * // Get one Comments
-     * const comments = await prisma.comments.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends CommentsFindFirstOrThrowArgs>(args?: SelectSubset<T, CommentsFindFirstOrThrowArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Comments that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CommentsFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Comments
-     * const comments = await prisma.comments.findMany()
-     * 
-     * // Get first 10 Comments
-     * const comments = await prisma.comments.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const commentsWithIdOnly = await prisma.comments.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends CommentsFindManyArgs>(args?: SelectSubset<T, CommentsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Comments.
-     * @param {CommentsCreateArgs} args - Arguments to create a Comments.
-     * @example
-     * // Create one Comments
-     * const Comments = await prisma.comments.create({
-     *   data: {
-     *     // ... data to create a Comments
-     *   }
-     * })
-     * 
-     */
-    create<T extends CommentsCreateArgs>(args: SelectSubset<T, CommentsCreateArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Comments.
-     * @param {CommentsCreateManyArgs} args - Arguments to create many Comments.
-     * @example
-     * // Create many Comments
-     * const comments = await prisma.comments.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends CommentsCreateManyArgs>(args?: SelectSubset<T, CommentsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Comments and returns the data saved in the database.
-     * @param {CommentsCreateManyAndReturnArgs} args - Arguments to create many Comments.
-     * @example
-     * // Create many Comments
-     * const comments = await prisma.comments.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Comments and only return the `id`
-     * const commentsWithIdOnly = await prisma.comments.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends CommentsCreateManyAndReturnArgs>(args?: SelectSubset<T, CommentsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Comments.
-     * @param {CommentsDeleteArgs} args - Arguments to delete one Comments.
-     * @example
-     * // Delete one Comments
-     * const Comments = await prisma.comments.delete({
-     *   where: {
-     *     // ... filter to delete one Comments
-     *   }
-     * })
-     * 
-     */
-    delete<T extends CommentsDeleteArgs>(args: SelectSubset<T, CommentsDeleteArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Comments.
-     * @param {CommentsUpdateArgs} args - Arguments to update one Comments.
-     * @example
-     * // Update one Comments
-     * const comments = await prisma.comments.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends CommentsUpdateArgs>(args: SelectSubset<T, CommentsUpdateArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Comments.
-     * @param {CommentsDeleteManyArgs} args - Arguments to filter Comments to delete.
-     * @example
-     * // Delete a few Comments
-     * const { count } = await prisma.comments.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends CommentsDeleteManyArgs>(args?: SelectSubset<T, CommentsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Comments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CommentsUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Comments
-     * const comments = await prisma.comments.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends CommentsUpdateManyArgs>(args: SelectSubset<T, CommentsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Comments and returns the data updated in the database.
-     * @param {CommentsUpdateManyAndReturnArgs} args - Arguments to update many Comments.
-     * @example
-     * // Update many Comments
-     * const comments = await prisma.comments.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Comments and only return the `id`
-     * const commentsWithIdOnly = await prisma.comments.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends CommentsUpdateManyAndReturnArgs>(args: SelectSubset<T, CommentsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Comments.
-     * @param {CommentsUpsertArgs} args - Arguments to update or create a Comments.
-     * @example
-     * // Update or create a Comments
-     * const comments = await prisma.comments.upsert({
-     *   create: {
-     *     // ... data to create a Comments
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Comments we want to update
-     *   }
-     * })
-     */
-    upsert<T extends CommentsUpsertArgs>(args: SelectSubset<T, CommentsUpsertArgs<ExtArgs>>): Prisma__CommentsClient<$Result.GetResult<Prisma.$CommentsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Comments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CommentsCountArgs} args - Arguments to filter Comments to count.
-     * @example
-     * // Count the number of Comments
-     * const count = await prisma.comments.count({
-     *   where: {
-     *     // ... the filter for the Comments we want to count
-     *   }
-     * })
-    **/
-    count<T extends CommentsCountArgs>(
-      args?: Subset<T, CommentsCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], CommentsCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Comments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CommentsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends CommentsAggregateArgs>(args: Subset<T, CommentsAggregateArgs>): Prisma.PrismaPromise<GetCommentsAggregateType<T>>
-
-    /**
-     * Group by Comments.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {CommentsGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends CommentsGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CommentsGroupByArgs['orderBy'] }
-        : { orderBy?: CommentsGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, CommentsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommentsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Comments model
-   */
-  readonly fields: CommentsFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Comments.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__CommentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    Users<T extends UsersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsersDefaultArgs<ExtArgs>>): Prisma__UsersClient<$Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Comments model
-   */
-  interface CommentsFieldRefs {
-    readonly id: FieldRef<"Comments", 'Int'>
-    readonly comment: FieldRef<"Comments", 'String'>
-    readonly user_id: FieldRef<"Comments", 'Int'>
-    readonly book_id: FieldRef<"Comments", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Comments findUnique
-   */
-  export type CommentsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which Comments to fetch.
-     */
-    where: CommentsWhereUniqueInput
-  }
-
-  /**
-   * Comments findUniqueOrThrow
-   */
-  export type CommentsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which Comments to fetch.
-     */
-    where: CommentsWhereUniqueInput
-  }
-
-  /**
-   * Comments findFirst
-   */
-  export type CommentsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which Comments to fetch.
-     */
-    where?: CommentsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Comments to fetch.
-     */
-    orderBy?: CommentsOrderByWithRelationInput | CommentsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Comments.
-     */
-    cursor?: CommentsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Comments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Comments.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Comments.
-     */
-    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
-  }
-
-  /**
-   * Comments findFirstOrThrow
-   */
-  export type CommentsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which Comments to fetch.
-     */
-    where?: CommentsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Comments to fetch.
-     */
-    orderBy?: CommentsOrderByWithRelationInput | CommentsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Comments.
-     */
-    cursor?: CommentsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Comments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Comments.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Comments.
-     */
-    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
-  }
-
-  /**
-   * Comments findMany
-   */
-  export type CommentsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    /**
-     * Filter, which Comments to fetch.
-     */
-    where?: CommentsWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Comments to fetch.
-     */
-    orderBy?: CommentsOrderByWithRelationInput | CommentsOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Comments.
-     */
-    cursor?: CommentsWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Comments from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Comments.
-     */
-    skip?: number
-    distinct?: CommentsScalarFieldEnum | CommentsScalarFieldEnum[]
-  }
-
-  /**
-   * Comments create
-   */
-  export type CommentsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Comments.
-     */
-    data: XOR<CommentsCreateInput, CommentsUncheckedCreateInput>
-  }
-
-  /**
-   * Comments createMany
-   */
-  export type CommentsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Comments.
-     */
-    data: CommentsCreateManyInput | CommentsCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Comments createManyAndReturn
-   */
-  export type CommentsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * The data used to create many Comments.
-     */
-    data: CommentsCreateManyInput | CommentsCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Comments update
-   */
-  export type CommentsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Comments.
-     */
-    data: XOR<CommentsUpdateInput, CommentsUncheckedUpdateInput>
-    /**
-     * Choose, which Comments to update.
-     */
-    where: CommentsWhereUniqueInput
-  }
-
-  /**
-   * Comments updateMany
-   */
-  export type CommentsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Comments.
-     */
-    data: XOR<CommentsUpdateManyMutationInput, CommentsUncheckedUpdateManyInput>
-    /**
-     * Filter which Comments to update
-     */
-    where?: CommentsWhereInput
-    /**
-     * Limit how many Comments to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Comments updateManyAndReturn
-   */
-  export type CommentsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * The data used to update Comments.
-     */
-    data: XOR<CommentsUpdateManyMutationInput, CommentsUncheckedUpdateManyInput>
-    /**
-     * Filter which Comments to update
-     */
-    where?: CommentsWhereInput
-    /**
-     * Limit how many Comments to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Comments upsert
-   */
-  export type CommentsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Comments to update in case it exists.
-     */
-    where: CommentsWhereUniqueInput
-    /**
-     * In case the Comments found by the `where` argument doesn't exist, create a new Comments with this data.
-     */
-    create: XOR<CommentsCreateInput, CommentsUncheckedCreateInput>
-    /**
-     * In case the Comments was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<CommentsUpdateInput, CommentsUncheckedUpdateInput>
-  }
-
-  /**
-   * Comments delete
-   */
-  export type CommentsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-    /**
-     * Filter which Comments to delete.
-     */
-    where: CommentsWhereUniqueInput
-  }
-
-  /**
-   * Comments deleteMany
-   */
-  export type CommentsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Comments to delete
-     */
-    where?: CommentsWhereInput
-    /**
-     * Limit how many Comments to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Comments without action
-   */
-  export type CommentsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Comments
-     */
-    select?: CommentsSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Comments
-     */
-    omit?: CommentsOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CommentsInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Enums
    */
 
@@ -8091,6 +8091,14 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const AuthorsScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type AuthorsScalarFieldEnum = (typeof AuthorsScalarFieldEnum)[keyof typeof AuthorsScalarFieldEnum]
+
+
   export const BooksScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -8102,12 +8110,14 @@ export namespace Prisma {
   export type BooksScalarFieldEnum = (typeof BooksScalarFieldEnum)[keyof typeof BooksScalarFieldEnum]
 
 
-  export const AuthorsScalarFieldEnum: {
+  export const CommentsScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    comment: 'comment',
+    user_id: 'user_id',
+    book_id: 'book_id'
   };
 
-  export type AuthorsScalarFieldEnum = (typeof AuthorsScalarFieldEnum)[keyof typeof AuthorsScalarFieldEnum]
+  export type CommentsScalarFieldEnum = (typeof CommentsScalarFieldEnum)[keyof typeof CommentsScalarFieldEnum]
 
 
   export const DeliveriesScalarFieldEnum: {
@@ -8140,16 +8150,6 @@ export namespace Prisma {
   };
 
   export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
-
-
-  export const CommentsScalarFieldEnum: {
-    id: 'id',
-    comment: 'comment',
-    user_id: 'user_id',
-    book_id: 'book_id'
-  };
-
-  export type CommentsScalarFieldEnum = (typeof CommentsScalarFieldEnum)[keyof typeof CommentsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8240,6 +8240,48 @@ export namespace Prisma {
    */
 
 
+  export type AuthorsWhereInput = {
+    AND?: AuthorsWhereInput | AuthorsWhereInput[]
+    OR?: AuthorsWhereInput[]
+    NOT?: AuthorsWhereInput | AuthorsWhereInput[]
+    id?: IntFilter<"Authors"> | number
+    name?: StringFilter<"Authors"> | string
+    Books?: BooksListRelationFilter
+  }
+
+  export type AuthorsOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    Books?: BooksOrderByRelationAggregateInput
+  }
+
+  export type AuthorsWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: AuthorsWhereInput | AuthorsWhereInput[]
+    OR?: AuthorsWhereInput[]
+    NOT?: AuthorsWhereInput | AuthorsWhereInput[]
+    Books?: BooksListRelationFilter
+  }, "id" | "name">
+
+  export type AuthorsOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: AuthorsCountOrderByAggregateInput
+    _avg?: AuthorsAvgOrderByAggregateInput
+    _max?: AuthorsMaxOrderByAggregateInput
+    _min?: AuthorsMinOrderByAggregateInput
+    _sum?: AuthorsSumOrderByAggregateInput
+  }
+
+  export type AuthorsScalarWhereWithAggregatesInput = {
+    AND?: AuthorsScalarWhereWithAggregatesInput | AuthorsScalarWhereWithAggregatesInput[]
+    OR?: AuthorsScalarWhereWithAggregatesInput[]
+    NOT?: AuthorsScalarWhereWithAggregatesInput | AuthorsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Authors"> | number
+    name?: StringWithAggregatesFilter<"Authors"> | string
+  }
+
   export type BooksWhereInput = {
     AND?: BooksWhereInput | BooksWhereInput[]
     OR?: BooksWhereInput[]
@@ -8300,46 +8342,56 @@ export namespace Prisma {
     note?: StringNullableWithAggregatesFilter<"Books"> | string | null
   }
 
-  export type AuthorsWhereInput = {
-    AND?: AuthorsWhereInput | AuthorsWhereInput[]
-    OR?: AuthorsWhereInput[]
-    NOT?: AuthorsWhereInput | AuthorsWhereInput[]
-    id?: IntFilter<"Authors"> | number
-    name?: StringFilter<"Authors"> | string
-    Books?: BooksListRelationFilter
+  export type CommentsWhereInput = {
+    AND?: CommentsWhereInput | CommentsWhereInput[]
+    OR?: CommentsWhereInput[]
+    NOT?: CommentsWhereInput | CommentsWhereInput[]
+    id?: IntFilter<"Comments"> | number
+    comment?: StringFilter<"Comments"> | string
+    user_id?: IntFilter<"Comments"> | number
+    book_id?: IntFilter<"Comments"> | number
+    Users?: XOR<UsersScalarRelationFilter, UsersWhereInput>
   }
 
-  export type AuthorsOrderByWithRelationInput = {
+  export type CommentsOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
-    Books?: BooksOrderByRelationAggregateInput
+    comment?: SortOrder
+    user_id?: SortOrder
+    book_id?: SortOrder
+    Users?: UsersOrderByWithRelationInput
   }
 
-  export type AuthorsWhereUniqueInput = Prisma.AtLeast<{
+  export type CommentsWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    name?: string
-    AND?: AuthorsWhereInput | AuthorsWhereInput[]
-    OR?: AuthorsWhereInput[]
-    NOT?: AuthorsWhereInput | AuthorsWhereInput[]
-    Books?: BooksListRelationFilter
-  }, "id" | "name">
+    AND?: CommentsWhereInput | CommentsWhereInput[]
+    OR?: CommentsWhereInput[]
+    NOT?: CommentsWhereInput | CommentsWhereInput[]
+    comment?: StringFilter<"Comments"> | string
+    user_id?: IntFilter<"Comments"> | number
+    book_id?: IntFilter<"Comments"> | number
+    Users?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+  }, "id">
 
-  export type AuthorsOrderByWithAggregationInput = {
+  export type CommentsOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
-    _count?: AuthorsCountOrderByAggregateInput
-    _avg?: AuthorsAvgOrderByAggregateInput
-    _max?: AuthorsMaxOrderByAggregateInput
-    _min?: AuthorsMinOrderByAggregateInput
-    _sum?: AuthorsSumOrderByAggregateInput
+    comment?: SortOrder
+    user_id?: SortOrder
+    book_id?: SortOrder
+    _count?: CommentsCountOrderByAggregateInput
+    _avg?: CommentsAvgOrderByAggregateInput
+    _max?: CommentsMaxOrderByAggregateInput
+    _min?: CommentsMinOrderByAggregateInput
+    _sum?: CommentsSumOrderByAggregateInput
   }
 
-  export type AuthorsScalarWhereWithAggregatesInput = {
-    AND?: AuthorsScalarWhereWithAggregatesInput | AuthorsScalarWhereWithAggregatesInput[]
-    OR?: AuthorsScalarWhereWithAggregatesInput[]
-    NOT?: AuthorsScalarWhereWithAggregatesInput | AuthorsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Authors"> | number
-    name?: StringWithAggregatesFilter<"Authors"> | string
+  export type CommentsScalarWhereWithAggregatesInput = {
+    AND?: CommentsScalarWhereWithAggregatesInput | CommentsScalarWhereWithAggregatesInput[]
+    OR?: CommentsScalarWhereWithAggregatesInput[]
+    NOT?: CommentsScalarWhereWithAggregatesInput | CommentsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Comments"> | number
+    comment?: StringWithAggregatesFilter<"Comments"> | string
+    user_id?: IntWithAggregatesFilter<"Comments"> | number
+    book_id?: IntWithAggregatesFilter<"Comments"> | number
   }
 
   export type DeliveriesWhereInput = {
@@ -8517,56 +8569,40 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Users"> | string
   }
 
-  export type CommentsWhereInput = {
-    AND?: CommentsWhereInput | CommentsWhereInput[]
-    OR?: CommentsWhereInput[]
-    NOT?: CommentsWhereInput | CommentsWhereInput[]
-    id?: IntFilter<"Comments"> | number
-    comment?: StringFilter<"Comments"> | string
-    user_id?: IntFilter<"Comments"> | number
-    book_id?: IntFilter<"Comments"> | number
-    Users?: XOR<UsersScalarRelationFilter, UsersWhereInput>
+  export type AuthorsCreateInput = {
+    name: string
+    Books?: BooksCreateNestedManyWithoutAuthorsInput
   }
 
-  export type CommentsOrderByWithRelationInput = {
-    id?: SortOrder
-    comment?: SortOrder
-    user_id?: SortOrder
-    book_id?: SortOrder
-    Users?: UsersOrderByWithRelationInput
-  }
-
-  export type CommentsWhereUniqueInput = Prisma.AtLeast<{
+  export type AuthorsUncheckedCreateInput = {
     id?: number
-    AND?: CommentsWhereInput | CommentsWhereInput[]
-    OR?: CommentsWhereInput[]
-    NOT?: CommentsWhereInput | CommentsWhereInput[]
-    comment?: StringFilter<"Comments"> | string
-    user_id?: IntFilter<"Comments"> | number
-    book_id?: IntFilter<"Comments"> | number
-    Users?: XOR<UsersScalarRelationFilter, UsersWhereInput>
-  }, "id">
-
-  export type CommentsOrderByWithAggregationInput = {
-    id?: SortOrder
-    comment?: SortOrder
-    user_id?: SortOrder
-    book_id?: SortOrder
-    _count?: CommentsCountOrderByAggregateInput
-    _avg?: CommentsAvgOrderByAggregateInput
-    _max?: CommentsMaxOrderByAggregateInput
-    _min?: CommentsMinOrderByAggregateInput
-    _sum?: CommentsSumOrderByAggregateInput
+    name: string
+    Books?: BooksUncheckedCreateNestedManyWithoutAuthorsInput
   }
 
-  export type CommentsScalarWhereWithAggregatesInput = {
-    AND?: CommentsScalarWhereWithAggregatesInput | CommentsScalarWhereWithAggregatesInput[]
-    OR?: CommentsScalarWhereWithAggregatesInput[]
-    NOT?: CommentsScalarWhereWithAggregatesInput | CommentsScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Comments"> | number
-    comment?: StringWithAggregatesFilter<"Comments"> | string
-    user_id?: IntWithAggregatesFilter<"Comments"> | number
-    book_id?: IntWithAggregatesFilter<"Comments"> | number
+  export type AuthorsUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    Books?: BooksUpdateManyWithoutAuthorsNestedInput
+  }
+
+  export type AuthorsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    Books?: BooksUncheckedUpdateManyWithoutAuthorsNestedInput
+  }
+
+  export type AuthorsCreateManyInput = {
+    id?: number
+    name: string
+  }
+
+  export type AuthorsUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AuthorsUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type BooksCreateInput = {
@@ -8625,40 +8661,49 @@ export namespace Prisma {
     note?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type AuthorsCreateInput = {
-    name: string
-    Books?: BooksCreateNestedManyWithoutAuthorsInput
+  export type CommentsCreateInput = {
+    comment: string
+    book_id: number
+    Users: UsersCreateNestedOneWithoutCommentsInput
   }
 
-  export type AuthorsUncheckedCreateInput = {
+  export type CommentsUncheckedCreateInput = {
     id?: number
-    name: string
-    Books?: BooksUncheckedCreateNestedManyWithoutAuthorsInput
+    comment: string
+    user_id: number
+    book_id: number
   }
 
-  export type AuthorsUpdateInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    Books?: BooksUpdateManyWithoutAuthorsNestedInput
+  export type CommentsUpdateInput = {
+    comment?: StringFieldUpdateOperationsInput | string
+    book_id?: IntFieldUpdateOperationsInput | number
+    Users?: UsersUpdateOneRequiredWithoutCommentsNestedInput
   }
 
-  export type AuthorsUncheckedUpdateInput = {
+  export type CommentsUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    Books?: BooksUncheckedUpdateManyWithoutAuthorsNestedInput
+    comment?: StringFieldUpdateOperationsInput | string
+    user_id?: IntFieldUpdateOperationsInput | number
+    book_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type AuthorsCreateManyInput = {
+  export type CommentsCreateManyInput = {
     id?: number
-    name: string
+    comment: string
+    user_id: number
+    book_id: number
   }
 
-  export type AuthorsUpdateManyMutationInput = {
-    name?: StringFieldUpdateOperationsInput | string
+  export type CommentsUpdateManyMutationInput = {
+    comment?: StringFieldUpdateOperationsInput | string
+    book_id?: IntFieldUpdateOperationsInput | number
   }
 
-  export type AuthorsUncheckedUpdateManyInput = {
+  export type CommentsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
+    comment?: StringFieldUpdateOperationsInput | string
+    user_id?: IntFieldUpdateOperationsInput | number
+    book_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type DeliveriesCreateInput = {
@@ -8822,51 +8867,6 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
   }
 
-  export type CommentsCreateInput = {
-    comment: string
-    book_id: number
-    Users: UsersCreateNestedOneWithoutCommentsInput
-  }
-
-  export type CommentsUncheckedCreateInput = {
-    id?: number
-    comment: string
-    user_id: number
-    book_id: number
-  }
-
-  export type CommentsUpdateInput = {
-    comment?: StringFieldUpdateOperationsInput | string
-    book_id?: IntFieldUpdateOperationsInput | number
-    Users?: UsersUpdateOneRequiredWithoutCommentsNestedInput
-  }
-
-  export type CommentsUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    comment?: StringFieldUpdateOperationsInput | string
-    user_id?: IntFieldUpdateOperationsInput | number
-    book_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CommentsCreateManyInput = {
-    id?: number
-    comment: string
-    user_id: number
-    book_id: number
-  }
-
-  export type CommentsUpdateManyMutationInput = {
-    comment?: StringFieldUpdateOperationsInput | string
-    book_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type CommentsUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    comment?: StringFieldUpdateOperationsInput | string
-    user_id?: IntFieldUpdateOperationsInput | number
-    book_id?: IntFieldUpdateOperationsInput | number
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -8891,6 +8891,73 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type BooksListRelationFilter = {
+    every?: BooksWhereInput
+    some?: BooksWhereInput
+    none?: BooksWhereInput
+  }
+
+  export type BooksOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AuthorsCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type AuthorsAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AuthorsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type AuthorsMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type AuthorsSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -8962,40 +9029,6 @@ export namespace Prisma {
     author?: SortOrder
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -9014,37 +9047,42 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type BooksListRelationFilter = {
-    every?: BooksWhereInput
-    some?: BooksWhereInput
-    none?: BooksWhereInput
+  export type UsersScalarRelationFilter = {
+    is?: UsersWhereInput
+    isNot?: UsersWhereInput
   }
 
-  export type BooksOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type AuthorsCountOrderByAggregateInput = {
+  export type CommentsCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    comment?: SortOrder
+    user_id?: SortOrder
+    book_id?: SortOrder
   }
 
-  export type AuthorsAvgOrderByAggregateInput = {
+  export type CommentsAvgOrderByAggregateInput = {
     id?: SortOrder
+    user_id?: SortOrder
+    book_id?: SortOrder
   }
 
-  export type AuthorsMaxOrderByAggregateInput = {
+  export type CommentsMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    comment?: SortOrder
+    user_id?: SortOrder
+    book_id?: SortOrder
   }
 
-  export type AuthorsMinOrderByAggregateInput = {
+  export type CommentsMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
+    comment?: SortOrder
+    user_id?: SortOrder
+    book_id?: SortOrder
   }
 
-  export type AuthorsSumOrderByAggregateInput = {
+  export type CommentsSumOrderByAggregateInput = {
     id?: SortOrder
+    user_id?: SortOrder
+    book_id?: SortOrder
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -9077,11 +9115,6 @@ export namespace Prisma {
   export type LibrariesScalarRelationFilter = {
     is?: LibrariesWhereInput
     isNot?: LibrariesWhereInput
-  }
-
-  export type UsersScalarRelationFilter = {
-    is?: UsersWhereInput
-    isNot?: UsersWhereInput
   }
 
   export type DeliveriesCountOrderByAggregateInput = {
@@ -9221,37 +9254,58 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type CommentsCountOrderByAggregateInput = {
-    id?: SortOrder
-    comment?: SortOrder
-    user_id?: SortOrder
-    book_id?: SortOrder
+  export type BooksCreateNestedManyWithoutAuthorsInput = {
+    create?: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput> | BooksCreateWithoutAuthorsInput[] | BooksUncheckedCreateWithoutAuthorsInput[]
+    connectOrCreate?: BooksCreateOrConnectWithoutAuthorsInput | BooksCreateOrConnectWithoutAuthorsInput[]
+    createMany?: BooksCreateManyAuthorsInputEnvelope
+    connect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
   }
 
-  export type CommentsAvgOrderByAggregateInput = {
-    id?: SortOrder
-    user_id?: SortOrder
-    book_id?: SortOrder
+  export type BooksUncheckedCreateNestedManyWithoutAuthorsInput = {
+    create?: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput> | BooksCreateWithoutAuthorsInput[] | BooksUncheckedCreateWithoutAuthorsInput[]
+    connectOrCreate?: BooksCreateOrConnectWithoutAuthorsInput | BooksCreateOrConnectWithoutAuthorsInput[]
+    createMany?: BooksCreateManyAuthorsInputEnvelope
+    connect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
   }
 
-  export type CommentsMaxOrderByAggregateInput = {
-    id?: SortOrder
-    comment?: SortOrder
-    user_id?: SortOrder
-    book_id?: SortOrder
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
   }
 
-  export type CommentsMinOrderByAggregateInput = {
-    id?: SortOrder
-    comment?: SortOrder
-    user_id?: SortOrder
-    book_id?: SortOrder
+  export type BooksUpdateManyWithoutAuthorsNestedInput = {
+    create?: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput> | BooksCreateWithoutAuthorsInput[] | BooksUncheckedCreateWithoutAuthorsInput[]
+    connectOrCreate?: BooksCreateOrConnectWithoutAuthorsInput | BooksCreateOrConnectWithoutAuthorsInput[]
+    upsert?: BooksUpsertWithWhereUniqueWithoutAuthorsInput | BooksUpsertWithWhereUniqueWithoutAuthorsInput[]
+    createMany?: BooksCreateManyAuthorsInputEnvelope
+    set?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
+    disconnect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
+    delete?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
+    connect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
+    update?: BooksUpdateWithWhereUniqueWithoutAuthorsInput | BooksUpdateWithWhereUniqueWithoutAuthorsInput[]
+    updateMany?: BooksUpdateManyWithWhereWithoutAuthorsInput | BooksUpdateManyWithWhereWithoutAuthorsInput[]
+    deleteMany?: BooksScalarWhereInput | BooksScalarWhereInput[]
   }
 
-  export type CommentsSumOrderByAggregateInput = {
-    id?: SortOrder
-    user_id?: SortOrder
-    book_id?: SortOrder
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type BooksUncheckedUpdateManyWithoutAuthorsNestedInput = {
+    create?: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput> | BooksCreateWithoutAuthorsInput[] | BooksUncheckedCreateWithoutAuthorsInput[]
+    connectOrCreate?: BooksCreateOrConnectWithoutAuthorsInput | BooksCreateOrConnectWithoutAuthorsInput[]
+    upsert?: BooksUpsertWithWhereUniqueWithoutAuthorsInput | BooksUpsertWithWhereUniqueWithoutAuthorsInput[]
+    createMany?: BooksCreateManyAuthorsInputEnvelope
+    set?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
+    disconnect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
+    delete?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
+    connect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
+    update?: BooksUpdateWithWhereUniqueWithoutAuthorsInput | BooksUpdateWithWhereUniqueWithoutAuthorsInput[]
+    updateMany?: BooksUpdateManyWithWhereWithoutAuthorsInput | BooksUpdateManyWithWhereWithoutAuthorsInput[]
+    deleteMany?: BooksScalarWhereInput | BooksScalarWhereInput[]
   }
 
   export type AuthorsCreateNestedOneWithoutBooksInput = {
@@ -9272,10 +9326,6 @@ export namespace Prisma {
     connectOrCreate?: DeliveriesCreateOrConnectWithoutBooksInput | DeliveriesCreateOrConnectWithoutBooksInput[]
     createMany?: DeliveriesCreateManyBooksInputEnvelope
     connect?: DeliveriesWhereUniqueInput | DeliveriesWhereUniqueInput[]
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -9304,14 +9354,6 @@ export namespace Prisma {
     deleteMany?: DeliveriesScalarWhereInput | DeliveriesScalarWhereInput[]
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type DeliveriesUncheckedUpdateManyWithoutBooksNestedInput = {
     create?: XOR<DeliveriesCreateWithoutBooksInput, DeliveriesUncheckedCreateWithoutBooksInput> | DeliveriesCreateWithoutBooksInput[] | DeliveriesUncheckedCreateWithoutBooksInput[]
     connectOrCreate?: DeliveriesCreateOrConnectWithoutBooksInput | DeliveriesCreateOrConnectWithoutBooksInput[]
@@ -9326,46 +9368,18 @@ export namespace Prisma {
     deleteMany?: DeliveriesScalarWhereInput | DeliveriesScalarWhereInput[]
   }
 
-  export type BooksCreateNestedManyWithoutAuthorsInput = {
-    create?: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput> | BooksCreateWithoutAuthorsInput[] | BooksUncheckedCreateWithoutAuthorsInput[]
-    connectOrCreate?: BooksCreateOrConnectWithoutAuthorsInput | BooksCreateOrConnectWithoutAuthorsInput[]
-    createMany?: BooksCreateManyAuthorsInputEnvelope
-    connect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
+  export type UsersCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<UsersCreateWithoutCommentsInput, UsersUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutCommentsInput
+    connect?: UsersWhereUniqueInput
   }
 
-  export type BooksUncheckedCreateNestedManyWithoutAuthorsInput = {
-    create?: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput> | BooksCreateWithoutAuthorsInput[] | BooksUncheckedCreateWithoutAuthorsInput[]
-    connectOrCreate?: BooksCreateOrConnectWithoutAuthorsInput | BooksCreateOrConnectWithoutAuthorsInput[]
-    createMany?: BooksCreateManyAuthorsInputEnvelope
-    connect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
-  }
-
-  export type BooksUpdateManyWithoutAuthorsNestedInput = {
-    create?: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput> | BooksCreateWithoutAuthorsInput[] | BooksUncheckedCreateWithoutAuthorsInput[]
-    connectOrCreate?: BooksCreateOrConnectWithoutAuthorsInput | BooksCreateOrConnectWithoutAuthorsInput[]
-    upsert?: BooksUpsertWithWhereUniqueWithoutAuthorsInput | BooksUpsertWithWhereUniqueWithoutAuthorsInput[]
-    createMany?: BooksCreateManyAuthorsInputEnvelope
-    set?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
-    disconnect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
-    delete?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
-    connect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
-    update?: BooksUpdateWithWhereUniqueWithoutAuthorsInput | BooksUpdateWithWhereUniqueWithoutAuthorsInput[]
-    updateMany?: BooksUpdateManyWithWhereWithoutAuthorsInput | BooksUpdateManyWithWhereWithoutAuthorsInput[]
-    deleteMany?: BooksScalarWhereInput | BooksScalarWhereInput[]
-  }
-
-  export type BooksUncheckedUpdateManyWithoutAuthorsNestedInput = {
-    create?: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput> | BooksCreateWithoutAuthorsInput[] | BooksUncheckedCreateWithoutAuthorsInput[]
-    connectOrCreate?: BooksCreateOrConnectWithoutAuthorsInput | BooksCreateOrConnectWithoutAuthorsInput[]
-    upsert?: BooksUpsertWithWhereUniqueWithoutAuthorsInput | BooksUpsertWithWhereUniqueWithoutAuthorsInput[]
-    createMany?: BooksCreateManyAuthorsInputEnvelope
-    set?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
-    disconnect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
-    delete?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
-    connect?: BooksWhereUniqueInput | BooksWhereUniqueInput[]
-    update?: BooksUpdateWithWhereUniqueWithoutAuthorsInput | BooksUpdateWithWhereUniqueWithoutAuthorsInput[]
-    updateMany?: BooksUpdateManyWithWhereWithoutAuthorsInput | BooksUpdateManyWithWhereWithoutAuthorsInput[]
-    deleteMany?: BooksScalarWhereInput | BooksScalarWhereInput[]
+  export type UsersUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<UsersCreateWithoutCommentsInput, UsersUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: UsersCreateOrConnectWithoutCommentsInput
+    upsert?: UsersUpsertWithoutCommentsInput
+    connect?: UsersWhereUniqueInput
+    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutCommentsInput, UsersUpdateWithoutCommentsInput>, UsersUncheckedUpdateWithoutCommentsInput>
   }
 
   export type BooksCreateNestedOneWithoutDeliveriesInput = {
@@ -9544,20 +9558,6 @@ export namespace Prisma {
     deleteMany?: DeliveriesScalarWhereInput | DeliveriesScalarWhereInput[]
   }
 
-  export type UsersCreateNestedOneWithoutCommentsInput = {
-    create?: XOR<UsersCreateWithoutCommentsInput, UsersUncheckedCreateWithoutCommentsInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutCommentsInput
-    connect?: UsersWhereUniqueInput
-  }
-
-  export type UsersUpdateOneRequiredWithoutCommentsNestedInput = {
-    create?: XOR<UsersCreateWithoutCommentsInput, UsersUncheckedCreateWithoutCommentsInput>
-    connectOrCreate?: UsersCreateOrConnectWithoutCommentsInput
-    upsert?: UsersUpsertWithoutCommentsInput
-    connect?: UsersWhereUniqueInput
-    update?: XOR<XOR<UsersUpdateToOneWithWhereWithoutCommentsInput, UsersUpdateWithoutCommentsInput>, UsersUncheckedUpdateWithoutCommentsInput>
-  }
-
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -9581,20 +9581,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -9639,6 +9625,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -9717,6 +9717,58 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BooksCreateWithoutAuthorsInput = {
+    title: string
+    description: string
+    note?: string | null
+    Deliveries?: DeliveriesCreateNestedManyWithoutBooksInput
+  }
+
+  export type BooksUncheckedCreateWithoutAuthorsInput = {
+    id?: number
+    title: string
+    description: string
+    note?: string | null
+    Deliveries?: DeliveriesUncheckedCreateNestedManyWithoutBooksInput
+  }
+
+  export type BooksCreateOrConnectWithoutAuthorsInput = {
+    where: BooksWhereUniqueInput
+    create: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput>
+  }
+
+  export type BooksCreateManyAuthorsInputEnvelope = {
+    data: BooksCreateManyAuthorsInput | BooksCreateManyAuthorsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BooksUpsertWithWhereUniqueWithoutAuthorsInput = {
+    where: BooksWhereUniqueInput
+    update: XOR<BooksUpdateWithoutAuthorsInput, BooksUncheckedUpdateWithoutAuthorsInput>
+    create: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput>
+  }
+
+  export type BooksUpdateWithWhereUniqueWithoutAuthorsInput = {
+    where: BooksWhereUniqueInput
+    data: XOR<BooksUpdateWithoutAuthorsInput, BooksUncheckedUpdateWithoutAuthorsInput>
+  }
+
+  export type BooksUpdateManyWithWhereWithoutAuthorsInput = {
+    where: BooksScalarWhereInput
+    data: XOR<BooksUpdateManyMutationInput, BooksUncheckedUpdateManyWithoutAuthorsInput>
+  }
+
+  export type BooksScalarWhereInput = {
+    AND?: BooksScalarWhereInput | BooksScalarWhereInput[]
+    OR?: BooksScalarWhereInput[]
+    NOT?: BooksScalarWhereInput | BooksScalarWhereInput[]
+    id?: IntFilter<"Books"> | number
+    title?: StringFilter<"Books"> | string
+    description?: StringFilter<"Books"> | string
+    author?: IntFilter<"Books"> | number
+    note?: StringNullableFilter<"Books"> | string | null
   }
 
   export type AuthorsCreateWithoutBooksInput = {
@@ -9809,56 +9861,50 @@ export namespace Prisma {
     user_id?: IntFilter<"Deliveries"> | number
   }
 
-  export type BooksCreateWithoutAuthorsInput = {
-    title: string
-    description: string
-    note?: string | null
-    Deliveries?: DeliveriesCreateNestedManyWithoutBooksInput
+  export type UsersCreateWithoutCommentsInput = {
+    firstname: string
+    lastname: string
+    email: string
+    Deliveries?: DeliveriesCreateNestedManyWithoutUsersInput
   }
 
-  export type BooksUncheckedCreateWithoutAuthorsInput = {
+  export type UsersUncheckedCreateWithoutCommentsInput = {
     id?: number
-    title: string
-    description: string
-    note?: string | null
-    Deliveries?: DeliveriesUncheckedCreateNestedManyWithoutBooksInput
+    firstname: string
+    lastname: string
+    email: string
+    Deliveries?: DeliveriesUncheckedCreateNestedManyWithoutUsersInput
   }
 
-  export type BooksCreateOrConnectWithoutAuthorsInput = {
-    where: BooksWhereUniqueInput
-    create: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput>
+  export type UsersCreateOrConnectWithoutCommentsInput = {
+    where: UsersWhereUniqueInput
+    create: XOR<UsersCreateWithoutCommentsInput, UsersUncheckedCreateWithoutCommentsInput>
   }
 
-  export type BooksCreateManyAuthorsInputEnvelope = {
-    data: BooksCreateManyAuthorsInput | BooksCreateManyAuthorsInput[]
-    skipDuplicates?: boolean
+  export type UsersUpsertWithoutCommentsInput = {
+    update: XOR<UsersUpdateWithoutCommentsInput, UsersUncheckedUpdateWithoutCommentsInput>
+    create: XOR<UsersCreateWithoutCommentsInput, UsersUncheckedCreateWithoutCommentsInput>
+    where?: UsersWhereInput
   }
 
-  export type BooksUpsertWithWhereUniqueWithoutAuthorsInput = {
-    where: BooksWhereUniqueInput
-    update: XOR<BooksUpdateWithoutAuthorsInput, BooksUncheckedUpdateWithoutAuthorsInput>
-    create: XOR<BooksCreateWithoutAuthorsInput, BooksUncheckedCreateWithoutAuthorsInput>
+  export type UsersUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: UsersWhereInput
+    data: XOR<UsersUpdateWithoutCommentsInput, UsersUncheckedUpdateWithoutCommentsInput>
   }
 
-  export type BooksUpdateWithWhereUniqueWithoutAuthorsInput = {
-    where: BooksWhereUniqueInput
-    data: XOR<BooksUpdateWithoutAuthorsInput, BooksUncheckedUpdateWithoutAuthorsInput>
+  export type UsersUpdateWithoutCommentsInput = {
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    Deliveries?: DeliveriesUpdateManyWithoutUsersNestedInput
   }
 
-  export type BooksUpdateManyWithWhereWithoutAuthorsInput = {
-    where: BooksScalarWhereInput
-    data: XOR<BooksUpdateManyMutationInput, BooksUncheckedUpdateManyWithoutAuthorsInput>
-  }
-
-  export type BooksScalarWhereInput = {
-    AND?: BooksScalarWhereInput | BooksScalarWhereInput[]
-    OR?: BooksScalarWhereInput[]
-    NOT?: BooksScalarWhereInput | BooksScalarWhereInput[]
-    id?: IntFilter<"Books"> | number
-    title?: StringFilter<"Books"> | string
-    description?: StringFilter<"Books"> | string
-    author?: IntFilter<"Books"> | number
-    note?: StringNullableFilter<"Books"> | string | null
+  export type UsersUncheckedUpdateWithoutCommentsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstname?: StringFieldUpdateOperationsInput | string
+    lastname?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    Deliveries?: DeliveriesUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type BooksCreateWithoutDeliveriesInput = {
@@ -10124,50 +10170,33 @@ export namespace Prisma {
     data: XOR<DeliveriesUpdateManyMutationInput, DeliveriesUncheckedUpdateManyWithoutUsersInput>
   }
 
-  export type UsersCreateWithoutCommentsInput = {
-    firstname: string
-    lastname: string
-    email: string
-    Deliveries?: DeliveriesCreateNestedManyWithoutUsersInput
-  }
-
-  export type UsersUncheckedCreateWithoutCommentsInput = {
+  export type BooksCreateManyAuthorsInput = {
     id?: number
-    firstname: string
-    lastname: string
-    email: string
-    Deliveries?: DeliveriesUncheckedCreateNestedManyWithoutUsersInput
+    title: string
+    description: string
+    note?: string | null
   }
 
-  export type UsersCreateOrConnectWithoutCommentsInput = {
-    where: UsersWhereUniqueInput
-    create: XOR<UsersCreateWithoutCommentsInput, UsersUncheckedCreateWithoutCommentsInput>
+  export type BooksUpdateWithoutAuthorsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    Deliveries?: DeliveriesUpdateManyWithoutBooksNestedInput
   }
 
-  export type UsersUpsertWithoutCommentsInput = {
-    update: XOR<UsersUpdateWithoutCommentsInput, UsersUncheckedUpdateWithoutCommentsInput>
-    create: XOR<UsersCreateWithoutCommentsInput, UsersUncheckedCreateWithoutCommentsInput>
-    where?: UsersWhereInput
-  }
-
-  export type UsersUpdateToOneWithWhereWithoutCommentsInput = {
-    where?: UsersWhereInput
-    data: XOR<UsersUpdateWithoutCommentsInput, UsersUncheckedUpdateWithoutCommentsInput>
-  }
-
-  export type UsersUpdateWithoutCommentsInput = {
-    firstname?: StringFieldUpdateOperationsInput | string
-    lastname?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    Deliveries?: DeliveriesUpdateManyWithoutUsersNestedInput
-  }
-
-  export type UsersUncheckedUpdateWithoutCommentsInput = {
+  export type BooksUncheckedUpdateWithoutAuthorsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    firstname?: StringFieldUpdateOperationsInput | string
-    lastname?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    Deliveries?: DeliveriesUncheckedUpdateManyWithoutUsersNestedInput
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    Deliveries?: DeliveriesUncheckedUpdateManyWithoutBooksNestedInput
+  }
+
+  export type BooksUncheckedUpdateManyWithoutAuthorsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DeliveriesCreateManyBooksInput = {
@@ -10203,35 +10232,6 @@ export namespace Prisma {
     due_date?: DateTimeFieldUpdateOperationsInput | Date | string
     returned_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_id?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type BooksCreateManyAuthorsInput = {
-    id?: number
-    title: string
-    description: string
-    note?: string | null
-  }
-
-  export type BooksUpdateWithoutAuthorsInput = {
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    Deliveries?: DeliveriesUpdateManyWithoutBooksNestedInput
-  }
-
-  export type BooksUncheckedUpdateWithoutAuthorsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
-    Deliveries?: DeliveriesUncheckedUpdateManyWithoutBooksNestedInput
-  }
-
-  export type BooksUncheckedUpdateManyWithoutAuthorsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    note?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type DeliveriesCreateManyLibrariesInput = {
