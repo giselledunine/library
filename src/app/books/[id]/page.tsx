@@ -223,8 +223,8 @@ export default function Book({ params }: { params: Promise<{ id: string }> }) {
         <div className="p-4 space-y-4">
             {loading && <Skeleton className="w-full h-[90px]"></Skeleton>}
             {book && !editing && (
-                <Card>
-                    <div className="grid grid-cols-[auto_1fr_auto] grid-rows-[repeat(2,auto)] justify-between p-4">
+                <Card className="p-4 sm:p-6">
+                    <div className="grid grid-cols-[auto_1fr_auto] grid-rows-[repeat(2,auto)] justify-between">
                         <div className="col-start-1 col-end-2 row-start-1 row-end-2 grid">
                             <Skeleton className="w-[80px] h-full"></Skeleton>
                         </div>
@@ -239,7 +239,7 @@ export default function Book({ params }: { params: Promise<{ id: string }> }) {
                             </CardHeader>
                         </div>
                         <div className="col-start-1 col-end-5 row-start-2 row-end-3 grid">
-                            <div className="py-4">{book.description}</div>
+                            <div className="pt-4">{book.description}</div>
                         </div>
                         <div className="col-start-3 col-end-4 row-start-1 row-end-2 grid">
                             <div className="flex gap-2 flex-col md:justify-between">
@@ -274,7 +274,7 @@ export default function Book({ params }: { params: Promise<{ id: string }> }) {
                 </Card>
             )}
             {book && editing && (
-                <Card>
+                <Card className="p-4 sm:p-6">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>
                             <CardHeader>
@@ -453,7 +453,7 @@ export default function Book({ params }: { params: Promise<{ id: string }> }) {
                 </Card>
             )}
             <Card>
-                <CardHeader>
+                <CardHeader className="p-4 sm:p-6">
                     <div className="flex justify-between items-center h-[36px]">
                         <CardTitle>Note du bibliothécaire</CardTitle>
                         {!editingNote && (
@@ -466,7 +466,7 @@ export default function Book({ params }: { params: Promise<{ id: string }> }) {
                         )}
                     </div>
                 </CardHeader>
-                <CardContent className="overflow-scroll">
+                <CardContent className="p-4 sm:p-6">
                     {!book?.note || editingNote ? (
                         <form onSubmit={form.handleSubmit(onSubmit)}>
                             <div className="flex flex-col gap-2">
@@ -490,8 +490,8 @@ export default function Book({ params }: { params: Promise<{ id: string }> }) {
                     )}
                 </CardContent>
             </Card>
-            <Card>
-                <CardHeader>
+            <Card className="w-[calc(100vw-32px)] sm:w-full">
+                <CardHeader className="p-4 sm:p-6">
                     <h2>Emprunts</h2>
                     <div className="w-full">
                         <Input
@@ -503,7 +503,7 @@ export default function Book({ params }: { params: Promise<{ id: string }> }) {
                         />
                     </div>
                 </CardHeader>
-                <CardContent className="w-full">
+                <CardContent className="overflow-scroll sm:overflow-auto">
                     <div className="w-full overflow-x-auto">
                         <Table>
                             <TableCaption>
