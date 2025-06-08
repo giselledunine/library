@@ -199,7 +199,6 @@ export function AppSidebar() {
                             <Collapsible
                                 key={el.title}
                                 asChild
-                                defaultOpen={el.isActive}
                                 className="group/collapsible">
                                 <SidebarMenuItem>
                                     <CollapsibleTrigger asChild>
