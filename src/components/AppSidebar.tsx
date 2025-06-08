@@ -205,7 +205,7 @@ export function AppSidebar() {
                                         <SidebarMenuButton
                                             tooltip={el.title}
                                             onClick={() => {
-                                                setActiveItem(el);
+                                                setActiveItem(el.title);
                                                 setOpen(true);
                                             }}
                                             isActive={
