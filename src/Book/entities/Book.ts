@@ -1,4 +1,4 @@
-import { Prisma } from "../../../prisma/src/generated/prisma";
+import { Prisma } from "@prisma/client";
 
 export type Books = Prisma.BooksGetPayload<{
     include: {
