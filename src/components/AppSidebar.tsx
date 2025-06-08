@@ -48,7 +48,6 @@ import Link from "next/link";
 
 export function AppSidebar() {
     const { isMobile, setOpen } = useSidebar();
-    const [activeItem, setActiveItem] = useState();
     const data = {
         user: {
             name: "Sophia Hmamouche",
@@ -130,6 +129,8 @@ export function AppSidebar() {
             },
         ],
     };
+    const [activeItem, setActiveItem] = useState<string>("");
+
     return (
         <Sidebar collapsible="icon">
             <SidebarHeader>
@@ -208,9 +209,7 @@ export function AppSidebar() {
                                                 setActiveItem(el.title);
                                                 setOpen(true);
                                             }}
-                                            isActive={
-                                                activeItem?.title === el.title
-                                            }
+                                            isActive={activeItem === el.title}
                                             className="px-2.5 md:px-2">
                                             <el.icon />
                                             <span>{el.title}</span>
