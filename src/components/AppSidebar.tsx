@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
     Sidebar,
     SidebarContent,
@@ -46,7 +47,8 @@ import {
 import Link from "next/link";
 
 export function AppSidebar() {
-    const { isMobile } = useSidebar();
+    const { isMobile, setOpen } = useSidebar();
+    const [activeItem, setActiveItem] = useState();
     const data = {
         user: {
             name: "Sophia Hmamouche",
@@ -62,9 +64,8 @@ export function AppSidebar() {
         navMain: [
             {
                 title: "Books",
-                url: "#",
+                url: "/books",
                 icon: BookCopy,
-                isActive: true,
                 items: [
                     {
                         title: "Liste",
@@ -80,61 +81,57 @@ export function AppSidebar() {
             },
             {
                 title: "Utilisateurs",
-                url: "#",
+                url: "/users",
                 icon: CircleUser,
                 items: [
                     {
                         title: "Liste",
-                        url: "/books",
+                        url: "/users",
                         icon: List,
                     },
                     {
                         title: "Ajouter des utilisateurs",
-                        url: "#",
+                        url: "/addUsers",
                         icon: PenLineIcon,
                     },
                 ],
             },
             {
                 title: "Réservations",
-                url: "#",
+                url: "/reservations",
                 icon: Calendar,
-                isActive: true,
                 items: [
                     {
                         title: "Liste",
-                        url: "/books",
+                        url: "/reservations",
                         icon: List,
                     },
                     {
                         title: "Ajouter des réservations",
-                        url: "#",
+                        url: "/addReservations",
                         icon: PenLineIcon,
                     },
                 ],
             },
             {
                 title: "Alertes",
-                url: "#",
+                url: "/alertes",
                 icon: AlertCircle,
-                isActive: true,
             },
             {
                 title: "Séléctions et nouveautés",
-                url: "#",
+                url: "/selection",
                 icon: Star,
-                isActive: true,
             },
             {
                 title: "Pour les pros",
                 url: "#",
                 icon: BriefcaseBusiness,
-                isActive: true,
             },
         ],
     };
     return (
-        <Sidebar side="right" collapsible="icon">
+        <Sidebar collapsible="icon">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
@@ -206,8 +203,17 @@ export function AppSidebar() {
                                 className="group/collapsible">
                                 <SidebarMenuItem>
                                     <CollapsibleTrigger asChild>
-                                        <SidebarMenuButton tooltip={el.title}>
-                                            {el.icon && <el.icon />}
+                                        <SidebarMenuButton
+                                            tooltip={el.title}
+                                            onClick={() => {
+                                                setActiveItem(el);
+                                                setOpen(true);
+                                            }}
+                                            isActive={
+                                                activeItem?.title === el.title
+                                            }
+                                            className="px-2.5 md:px-2">
+                                            <el.icon />
                                             <span>{el.title}</span>
                                             <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                                         </SidebarMenuButton>

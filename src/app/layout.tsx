@@ -27,6 +27,7 @@ export default function RootLayout({
                     disableTransitionOnChange>
                     <Toaster expand />
                     <SidebarProvider>
+                        <AppSidebar />
                         <div className="grid grid-rows-[auto_3fr_1fr] h-screen w-full">
                             <Header></Header>
                             {children}
@@ -34,7 +35,6 @@ export default function RootLayout({
                                 <h3>Footer</h3>
                             </div>
                         </div>
-                        <AppSidebar />
                     </SidebarProvider>
                 </ThemeProvider>
             </body>
